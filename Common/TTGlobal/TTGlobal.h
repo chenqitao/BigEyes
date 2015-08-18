@@ -14,6 +14,8 @@
 #define TTScreenHeight  [UIScreen mainScreen].bounds.size.height
 #define TTIOSUIDevice   [[[UIDevice currentDevice] systemVersion] floatValue]
 #define TTNavigationbarHeight  64
+#define HeadViewHeight 200
+#define naviH 64
 
 
 #import "TTHTTPRequest.h"
@@ -31,6 +33,7 @@
 
 #define TTImageListURL @"/huhu/upload/discuz2app1/topiclist.php?type=second1"
 #define TTPostPictureURL @"/huhu/upload/discuz2app1/topiclist.php?type=submit"
+#define TTGetDetailURL @"/huhu/upload/discuz2app1/topiclist.php?type=thread_detail"
 
 
 

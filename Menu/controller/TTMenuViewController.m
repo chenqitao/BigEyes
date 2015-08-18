@@ -8,6 +8,10 @@
 
 #import "TTMenuViewController.h"
 #import "TTMenuTableViewCell.h"
+#import "TTMyInfoViewController.h"
+#import "TTAboutUsViewController.h"
+#import "TTFocusViewController.h"
+#import "TTSettingsViewController.h"
 
 @interface TTMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -100,7 +104,48 @@
     TTMenuTableViewCell *menuTableViewCell = (TTMenuTableViewCell *)cell;
     menuTableViewCell.titleLab.text = dataSource[indexPath.row];
   
+   
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.row) {
+        case 0:{
+            UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
+            TTMyInfoViewController *infoVC = [[TTMyInfoViewController alloc] init];
+            infoVC.showNavi = YES;
+            [nav pushViewController:infoVC animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+        }
+            break;
+        case 1: {
+            UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
+            TTFocusViewController *focusVC = [[TTFocusViewController alloc] init];
+            focusVC.showNavi = YES;
+            [nav pushViewController:focusVC animated:YES];
+            [self.sideMenuViewController hideMenuViewController];        }
+            break;
+        case 2: {
+            UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
+            TTAboutUsViewController *aboutVC = [[TTAboutUsViewController alloc] init];
+            aboutVC.showNavi = YES;
+            [nav pushViewController:aboutVC animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+        }
+            break;
+        case 3: {
+            UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
+            TTSettingsViewController *settingsVC = [[TTSettingsViewController alloc] init];
+            settingsVC.showNavi = YES;
+            [nav pushViewController:settingsVC animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+        }
+            break;
+        default:
+            break;
+    }
+
     
     
 }

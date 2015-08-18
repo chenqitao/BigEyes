@@ -9,14 +9,16 @@
 #import "ImageListViewController.h"
 #import "ImageModel.h"
 #import "ImageTableViewCell.h"
+#import "TTdetailViewController.h"
 
 @interface ImageListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
-    UITableView *mytableView;
+    UITableView    *mytableView;
     NSMutableArray *dataSource;   //数据源
-    NSInteger    pageno;    //获取List的第几页
-    NSInteger    pagesize;  //获取List的个数
-    UIButton    *camaraBtn; //大眼睛拍照按钮
+    NSInteger      pageno;        //获取List的第几页
+    NSInteger      pagesize;      //获取List的个数
+    UIButton       *camaraBtn;    //大眼睛拍照按钮
+   
    
 }
 
@@ -123,6 +125,22 @@
   
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    TTdetailViewController *detailVC;
+    if (!detailVC) {
+        detailVC = [[TTdetailViewController alloc]init];
+    }
+    
+    NSLog(@"%@", dataSource[indexPath.row]);
+    ImageModel *imageModel = dataSource[indexPath.row];
+    detailVC.detailImageURL = imageModel.snapurl;
+    detailVC.tid            = imageModel.tid;
+    [self.navigationController pushViewController:detailVC animated:YES];
+    
+    
+    
+}
 
 
 

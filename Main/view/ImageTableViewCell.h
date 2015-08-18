@@ -12,13 +12,13 @@
 
 @interface ImageTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UIImageView *userImage;   //用户头像
+@property (nonatomic, strong) UIImageView *userImage;        //用户头像
 @property (nonatomic, strong) UIImageView *backgroundImage;  //背景图片
-@property (nonatomic, strong) UIView      *blurView;    //透明图片
-@property (nonatomic, strong) UILabel     *titleLab;    //标题
-@property (nonatomic, strong) UILabel     *time;        //时间
-@property (nonatomic, strong) UIButton    *commentBtn;  //评论
-@property (nonatomic, strong) UIButton    *focusBtn;    //关注
-@property (nonatomic, strong)   ImageModel  *imagemodel;  //数据
+@property (nonatomic, strong) UIView      *blurView;         //透明图片
+@property (nonatomic, strong) UILabel     *titleLab;         //标题
+@property (nonatomic, strong) UILabel     *time;             //时间
+@property (nonatomic, strong) UIButton    *commentBtn;       //评论
+@property (nonatomic, strong) UIButton    *focusBtn;         //关注
+@property (nonatomic, strong) ImageModel  *imagemodel;       //数据
 
 @end
