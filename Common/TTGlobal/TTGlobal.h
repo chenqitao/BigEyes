@@ -29,7 +29,8 @@
 
 
 
-
+#define TTImageListURL @"/huhu/upload/discuz2app1/topiclist.php?type=second1"
+#define TTPostPictureURL @"/huhu/upload/discuz2app1/topiclist.php?type=submit"
 
 
 

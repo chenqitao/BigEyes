@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D00FEF80-AF37-4F08-8A56-D7FB5D2328E5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BigEyes</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F4ED5A0188C3AA9F035EE06577AEF79B6AF71634</key>
+		<string>https://github.com/chenqitao/BigEyes.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BigEyes.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F4ED5A0188C3AA9F035EE06577AEF79B6AF71634</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/chenqitao/BigEyes.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F4ED5A0188C3AA9F035EE06577AEF79B6AF71634</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F4ED5A0188C3AA9F035EE06577AEF79B6AF71634</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BigEyess</string>
+		</dict>
+	</array>
+</dict>
+</plist>

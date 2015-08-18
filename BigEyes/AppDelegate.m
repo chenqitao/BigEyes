@@ -7,9 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "ImageListViewController.h"
+#import "TTMenuViewController.h"
 
 
 @interface AppDelegate ()
+{
+  RESideMenu *sideMenuViewController;
+}
 
 @end
 
@@ -17,12 +22,38 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self customizeInterface];
+    
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-  
+    ImageListViewController *imageVC = [[ImageListViewController alloc]init];
+    imageVC.showNavi = YES;
+    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:imageVC];
+    TTMenuViewController  *menuVC = [[TTMenuViewController alloc]init];
+    sideMenuViewController = [[RESideMenu alloc]initWithContentViewController:navVC leftMenuViewController:menuVC rightMenuViewController:nil];
+    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"sideground"];
+    self.window.rootViewController = sideMenuViewController;
     [self.window makeKeyAndVisible];
+    
     // Override point for customization after application launch.
     return YES;
+}
+
+
+
+#pragma mark - 自定义界面
+- (void)customizeInterface {
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:229.0/255.0 green:80.0/255.0 blue:76.0/255.0 alpha:1.0], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    
+    [[UINavigationBar appearance] setBarTintColor:TTColor(255, 0, 19, 1)];
+  
+    //[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSForegroundColorAttributeName,[UIFont fontWithName:@"STHeitiSC-Light" size:20.0], NSFontAttributeName, nil]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

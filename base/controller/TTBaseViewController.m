@@ -120,10 +120,10 @@
 {
    
 }
--(void)createUI{
+-(void)createUI {
     
 }
--(void)createData{
+-(void)createData {
     
 }
 - (void)didReceiveMemoryWarning {

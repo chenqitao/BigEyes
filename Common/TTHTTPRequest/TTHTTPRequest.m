@@ -7,7 +7,7 @@
 //
 
 #import "TTHTTPRequest.h"
-static NSString *baseURL = @"https://123.57.48.206";
+static NSString *baseURL = @"http://123.57.48.206";
 
 @implementation TTHTTPRequest
 + (TTHTTPRequest *)shareHTTPRequest {

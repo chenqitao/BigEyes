@@ -14,7 +14,7 @@
 #import <AFNetworking.h>
 #import <TMCache.h>
 #import <Masonry.h>
-#import <BlocksKit.h>
+#import <BlocksKit+UIKit.h>
 #import <GPUImage.h>
 #import <MJRefresh.h>
 #import <Mantle.h>
@@ -22,6 +22,7 @@
 #import <RESideMenu.h>
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
+#import <RESideMenu.h>
 
 
 #import "TTGlobal.h"
