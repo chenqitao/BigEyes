@@ -39,6 +39,10 @@
 #define TTGetDetailURL     @"/huhu/upload/discuz2app1/topiclist.php?type=thread_detail"
 #define TTGetFavoutListURL @"/huhu/upload/discuz2app1/favourlist.php?type=favourlist"
 #define TTGetFocusListURL  @"/huhu/upload/discuz2app1/topicfocuslist.php?type=focus"
+#define TTDeleteFavourURL  @"/huhu/upload/discuz2app1/topicpost.php?type=deletefavour"
+#define TTFavourURL        @"/huhu/upload/discuz2app1/topicpost.php?type=favour"
+#define TTFocusURL         @"/huhu/upload/discuz2app1/topicpost.php?type=focus"
+#define TTDeleteFocusURL   @"/huhu/upload/discuz2app1/topicpost.php?type=deletefocus"
 
 
 

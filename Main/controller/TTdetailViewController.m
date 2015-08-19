@@ -49,7 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
     [self setUpNavigtionBar];
     // Do any additional setup after loading the view.
 }
@@ -155,7 +155,7 @@
 
 #pragma mark   获取点赞列表
 - (void)loadFavourList {
-    isfavour = NO;
+   
     favourArr = [[NSMutableArray alloc]init];
     [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTGetFavoutListURL parmars:@{@"tid":_tid} success:^(id responseObject) {
        
@@ -192,8 +192,56 @@
         NSLog(@"error:%@",error);
     }];
 
+}
+
+#pragma mark  点赞
+- (void)favourWithTid:(NSString *)tid {
+    if (isfavour){
+        [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTDeleteFavourURL parmars:@{@"sid":[TTUserDefaultTool objectForKey:TTSessionid],@"tid":tid,@"favour_id":favourid} success:^(id responseObject) {
+             isfavour = !isfavour;
+            [self createData];
+        } fail:^(NSError *error) {
+            NSLog(@"error:%@",error);
+        }];
+    
+    }
+    else {
+        [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTFavourURL parmars:@{@"sid":[TTUserDefaultTool objectForKey:TTSessionid],@"tid":tid,@"uid":[TTUserDefaultTool objectForKey:TTuid]} success:^(id responseObject) {
+            isfavour = !isfavour;
+            [self createData];
+        } fail:^(NSError *error) {
+            NSLog(@"error:%@",error);
+        }];
+    
+    }
 
 }
+
+#pragma mark  关注
+
+- (void)focusWithTid:(NSString *)tid {
+    if (isfocus){
+        [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTDeleteFocusURL parmars:@{@"sid":[TTUserDefaultTool objectForKey:TTSessionid],@"uid":[TTUserDefaultTool objectForKey:TTuid],@"focusid":focusid} success:^(id responseObject) {
+            isfocus = !isfocus;
+            [self createData];
+        } fail:^(NSError *error) {
+            NSLog(@"error:%@",error);
+        }];
+        
+    }
+    else {
+        [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTFocusURL parmars:@{@"sid":[TTUserDefaultTool objectForKey:TTSessionid],@"tid":tid,@"uid":[TTUserDefaultTool objectForKey:TTuid]} success:^(id responseObject) {
+            isfocus = !isfocus;
+            [self createData];
+        } fail:^(NSError *error) {
+            NSLog(@"error:%@",error);
+        }];
+        
+    }
+
+
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -239,6 +287,10 @@
         importableviewcell.addressLab.text     = @"";
         
         //获取点赞列表，并将头像放到scrollview上
+        //移除scroll上面的所有子视图
+        for (UIView *obj in importableviewcell.scroll.subviews) {
+            [obj removeFromSuperview];
+        }
         importableviewcell.scroll.contentSize  = CGSizeMake(TTFavouruserImage*favourArr.count, TTFavouruserImage);
         for (int i=0;i<favourArr.count;i++ ) {
             UIImageView *userImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*(TTFavouruserImage+10), 0, TTFavouruserImage, TTFavouruserImage)];
@@ -247,8 +299,17 @@
             [importableviewcell.scroll addSubview:userImage];
         }
         
+        [importableviewcell.favourBtn bk_whenTapped:^{
+            [self favourWithTid:_tid];
+        }];
         
-
+        [importableviewcell.focusBtn bk_whenTapped:^{
+            [self focusWithTid:_tid];
+        }];
+        
+        [importableviewcell.shareBtn bk_whenTapped:^{
+            NSLog(@"分享");
+        }];
     
     
     }
