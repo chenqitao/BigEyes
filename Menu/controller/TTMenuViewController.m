@@ -115,6 +115,7 @@
             UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
             TTMyInfoViewController *infoVC = [[TTMyInfoViewController alloc] init];
             infoVC.showNavi = YES;
+            infoVC.haveBack = YES;
             [nav pushViewController:infoVC animated:YES];
             [self.sideMenuViewController hideMenuViewController];
         }
@@ -123,6 +124,7 @@
             UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
             TTFocusViewController *focusVC = [[TTFocusViewController alloc] init];
             focusVC.showNavi = YES;
+            focusVC.haveBack = YES;
             [nav pushViewController:focusVC animated:YES];
             [self.sideMenuViewController hideMenuViewController];        }
             break;
@@ -130,6 +132,7 @@
             UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
             TTAboutUsViewController *aboutVC = [[TTAboutUsViewController alloc] init];
             aboutVC.showNavi = YES;
+            aboutVC.haveBack = YES;
             [nav pushViewController:aboutVC animated:YES];
             [self.sideMenuViewController hideMenuViewController];
         }
@@ -138,6 +141,7 @@
             UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
             TTSettingsViewController *settingsVC = [[TTSettingsViewController alloc] init];
             settingsVC.showNavi = YES;
+            settingsVC.haveBack = YES;
             [nav pushViewController:settingsVC animated:YES];
             [self.sideMenuViewController hideMenuViewController];
         }

@@ -11,6 +11,7 @@
 #import "ImageTableViewCell.h"
 #import "TTdetailViewController.h"
 
+
 @interface ImageListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView    *mytableView;
@@ -131,8 +132,8 @@
     if (!detailVC) {
         detailVC = [[TTdetailViewController alloc]init];
     }
-    
-    NSLog(@"%@", dataSource[indexPath.row]);
+    detailVC.showNavi = NO;
+    detailVC.haveBack = NO;
     ImageModel *imageModel = dataSource[indexPath.row];
     detailVC.detailImageURL = imageModel.snapurl;
     detailVC.tid            = imageModel.tid;
@@ -157,6 +158,8 @@
 
 
 }
+
+
 #pragma mark 弹出menu视图
 - (void)pushmap {
 
@@ -168,6 +171,10 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+
+    [self.navigationController setNavigationBarHidden:NO];
+}
 
 
 @end

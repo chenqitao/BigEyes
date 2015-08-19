@@ -23,6 +23,8 @@
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
 #import <RESideMenu.h>
+#import <CoreLocation/CoreLocation.h>
+
 
 
 #import "TTGlobal.h"

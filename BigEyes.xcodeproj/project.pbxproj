@@ -36,6 +36,8 @@
 		AFDBBB3B1B830FD400693BDB /* DetailImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDBBB3A1B830FD400693BDB /* DetailImageModel.m */; };
 		AFDBBB3E1B831D8900693BDB /* ImporTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDBBB3D1B831D8900693BDB /* ImporTableViewCell.m */; };
 		AFDBBB411B83217B00693BDB /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDBBB401B83217B00693BDB /* CommentTableViewCell.m */; };
+		AFDBBB441B842CDC00693BDB /* FavourModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDBBB431B842CDC00693BDB /* FavourModel.m */; };
+		AFDBBB471B842CEC00693BDB /* FocusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDBBB461B842CEC00693BDB /* FocusModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +112,10 @@
 		AFDBBB3D1B831D8900693BDB /* ImporTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImporTableViewCell.m; sourceTree = "<group>"; };
 		AFDBBB3F1B83217B00693BDB /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
 		AFDBBB401B83217B00693BDB /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
+		AFDBBB421B842CDC00693BDB /* FavourModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavourModel.h; sourceTree = "<group>"; };
+		AFDBBB431B842CDC00693BDB /* FavourModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavourModel.m; sourceTree = "<group>"; };
+		AFDBBB451B842CEC00693BDB /* FocusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusModel.h; sourceTree = "<group>"; };
+		AFDBBB461B842CEC00693BDB /* FocusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusModel.m; sourceTree = "<group>"; };
 		C9706D994C62315383FA0BBF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -289,6 +295,10 @@
 				AFDBBB1B1B7DD79700693BDB /* ImageModel.m */,
 				AFDBBB391B830FD400693BDB /* DetailImageModel.h */,
 				AFDBBB3A1B830FD400693BDB /* DetailImageModel.m */,
+				AFDBBB421B842CDC00693BDB /* FavourModel.h */,
+				AFDBBB431B842CDC00693BDB /* FavourModel.m */,
+				AFDBBB451B842CEC00693BDB /* FocusModel.h */,
+				AFDBBB461B842CEC00693BDB /* FocusModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -580,10 +590,12 @@
 				AF50DD5D1B7D95F200A0AFB3 /* TTBaseViewController.m in Sources */,
 				AF50DD631B7D95F200A0AFB3 /* MBProgressHUD+Simple.m in Sources */,
 				AFDBBB351B82D7E700693BDB /* TTSettingsViewController.m in Sources */,
+				AFDBBB441B842CDC00693BDB /* FavourModel.m in Sources */,
 				AFA51BAF1B7D903D00EB08B9 /* AppDelegate.m in Sources */,
 				AFDBBB321B82D7D400693BDB /* TTFocusViewController.m in Sources */,
 				AFDBBB261B8235EE00693BDB /* TTMenuViewController.m in Sources */,
 				AFDBBB1F1B7DE23200693BDB /* ImageTableViewCell.m in Sources */,
+				AFDBBB471B842CEC00693BDB /* FocusModel.m in Sources */,
 				AF50DD701B7D9E8700A0AFB3 /* TTRegistViewController.m in Sources */,
 				AF50DD5F1B7D95F200A0AFB3 /* TTHTTPRequest.m in Sources */,
 				AFDBBB3B1B830FD400693BDB /* DetailImageModel.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DetailImageModel.h"
+#import "FavourModel.h"
 
 @interface ImporTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel  *addressLab;     //地址标签
@@ -18,5 +19,6 @@
 @property (nonatomic, strong) UIButton *shareBtn;       //分享按钮
 @property (nonatomic, strong) UIScrollView *scroll;     //滚动视图
 @property (nonatomic, strong) DetailImageModel *detailModel;
+@property (nonatomic, strong) FavourModel      *favourModel;
 
 @end

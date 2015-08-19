@@ -43,7 +43,7 @@
         make.width.equalTo(@32);
         make.height.equalTo(@27);
     }];
-    
+
     _favourCountLab = [UILabel new];
     [self.contentView addSubview:_favourCountLab];
     _favourCountLab.font = [UIFont fontWithName:nil size:17];
@@ -54,7 +54,7 @@
         make.width.equalTo(@20);
         make.height.equalTo(@21);
     }];
-    
+
     _focusBtn = [UIButton new];
     [self.contentView addSubview:_focusBtn];
     [_focusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,7 +63,7 @@
         make.width.equalTo(@32);
         make.height.equalTo(@27);
     }];
-    
+
     _shareBtn = [UIButton new];
     [self.contentView addSubview:_shareBtn];
     [_shareBtn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
@@ -75,16 +75,16 @@
         make.width.equalTo(@32);
         make.height.equalTo(@27);
     }];
-    
+
     _addressLab = [UILabel new];
     [self.contentView addSubview:_addressLab];
     [_addressLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(8);
         make.right.equalTo(self.contentView.mas_right).with.offset(-8);
         make.top.equalTo(self.contentView.mas_top).with.offset(0);
-        make.height.equalTo(@50);
+        make.height.equalTo(@20);
     }];
-    
+
     _titleLab = [UILabel new];
     [self.contentView addSubview:_titleLab];
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
