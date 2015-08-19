@@ -12,6 +12,6 @@
 /** 详情图片地址 */
 @property (nonatomic, copy)   NSString  *detailImageURL;
 /** 帖子id */
-@property (nonatomic, assign)   NSInteger  tid;
+@property (nonatomic, copy)   NSString  *tid;
 
 @end

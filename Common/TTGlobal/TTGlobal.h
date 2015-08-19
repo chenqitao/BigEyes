@@ -22,6 +22,10 @@
 #import "TTUserDefaultTool.h"
 
 
+#define TTSessionid @"sessionid"
+#define TTuid       @"uid"
+#define TTpassword  @"password"
+#define TTname      @"name"
 
 
 
@@ -30,11 +34,11 @@
 
 
 
-
-#define TTImageListURL @"/huhu/upload/discuz2app1/topiclist.php?type=second1"
-#define TTPostPictureURL @"/huhu/upload/discuz2app1/topiclist.php?type=submit"
-#define TTGetDetailURL @"/huhu/upload/discuz2app1/topiclist.php?type=thread_detail"
+#define TTImageListURL     @"/huhu/upload/discuz2app1/topiclist.php?type=second1"
+#define TTPostPictureURL   @"/huhu/upload/discuz2app1/topiclist.php?type=submit"
+#define TTGetDetailURL     @"/huhu/upload/discuz2app1/topiclist.php?type=thread_detail"
 #define TTGetFavoutListURL @"/huhu/upload/discuz2app1/favourlist.php?type=favourlist"
+#define TTGetFocusListURL  @"/huhu/upload/discuz2app1/topicfocuslist.php?type=focus"
 
 
 

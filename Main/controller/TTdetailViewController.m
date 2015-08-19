@@ -15,12 +15,17 @@
 #define TTFavouruserImage 50
 @interface TTdetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
-   UITableView    *mytableView;
-   NSMutableArray *dataSource;         //model数据数组
-   NSMutableArray *favourArr;          //点赞数组model
-   UIImageView    *headImage;          //头部图片
-   NSString       *lat;                //精度
-   NSString       *lng;                //纬度
+    UITableView    *mytableView;
+    NSMutableArray *dataSource;         //model数据数组
+    NSMutableArray *favourArr;          //点赞数组model
+    UIImageView    *headImage;          //头部图片
+    NSString       *lat;                //精度
+    NSString       *lng;                //纬度
+    NSString       *favourid;           //点赞id
+    NSString       *focusid;            //关注id
+    BOOL           isfavour;            //是否点赞
+    BOOL           isfocus;             //是否关注
+    
 
 }
 /** 记录scrollView上次偏移的Y距离 */
@@ -132,7 +137,7 @@
 
 - (void)createData {
     dataSource = [[NSMutableArray alloc]init];
-    [[TTHTTPRequest shareHTTPRequest]openAPIGetToMethod:TTGetDetailURL parmars:@{@"tid":[NSNumber numberWithInteger:_tid],@"pageno":@"1",@"pagesize":@"20"} success:^(id responseObject) {
+    [[TTHTTPRequest shareHTTPRequest]openAPIGetToMethod:TTGetDetailURL parmars:@{@"tid":_tid,@"pageno":@"1",@"pagesize":@"20"} success:^(id responseObject) {
         NSArray *arr = responseObject[@"datas"];
         for (NSDictionary *dic in arr) {
             DetailImageModel *detailModel = [DetailImageModel objectWithKeyValues:dic];
@@ -150,19 +155,42 @@
 
 #pragma mark   获取点赞列表
 - (void)loadFavourList {
+    isfavour = NO;
     favourArr = [[NSMutableArray alloc]init];
-    [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTGetFavoutListURL parmars:@{@"tid":[NSNumber numberWithInteger:_tid]} success:^(id responseObject) {
+    [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTGetFavoutListURL parmars:@{@"tid":_tid} success:^(id responseObject) {
        
         NSArray *arr = responseObject[@"datas"];
         for (NSDictionary *dic in arr) {
             FavourModel *favourmodel = [FavourModel objectWithKeyValues:dic];
             [favourArr addObject:favourmodel];
+            if ([[TTUserDefaultTool objectForKey:TTuid]isEqualToString:favourmodel.uid] ) {
+                isfavour = YES;
+                favourid = favourmodel.favour_id;
+            }
         }
-        [mytableView reloadData];
+        
+        [self loadFocusList];
       } fail:^(NSError *error) {
           
       }];
- 
+
+}
+
+#pragma mark  获取关注列表
+- (void)loadFocusList {
+    isfocus = NO;
+    [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTGetFocusListURL parmars:@{@"uid":[TTUserDefaultTool objectForKey:TTuid],@"sid":[TTUserDefaultTool objectForKey:TTSessionid]} success:^(id responseObject) {
+        NSArray *focusArr = responseObject[@"datas"];
+        for (NSDictionary *dic in focusArr) {
+            if ([dic[@"tid"]isEqualToString:_tid]) {
+                focusid = dic[@"focusid"];
+                isfocus = YES;
+            }
+        }
+        [mytableView reloadData];
+    } fail:^(NSError *error) {
+        NSLog(@"error:%@",error);
+    }];
 
 
 }
@@ -202,8 +230,10 @@
     
     if (indexPath.row == 0) {
         ImporTableViewCell *importableviewcell = (ImporTableViewCell *)cell;
-        [importableviewcell.favourBtn setImage:[UIImage imageNamed:@"is_favour_no"] forState:UIControlStateNormal];
-        [importableviewcell.focusBtn setImage:[UIImage imageNamed:@"is_focus_no"] forState:UIControlStateNormal];
+        UIImage *favourBtnimage = isfavour == YES?[UIImage imageNamed:@"is_favour_yes"]:[UIImage imageNamed:@"is_favour_no"];
+        UIImage *focusBtnImage  = isfocus  == YES?[UIImage imageNamed:@"is_focus_yes"]:[UIImage imageNamed:@"is_focus_no"];
+        [importableviewcell.favourBtn setImage:favourBtnimage forState:UIControlStateNormal];
+        [importableviewcell.focusBtn setImage:focusBtnImage forState:UIControlStateNormal];
         importableviewcell.detailModel         = dataSource[indexPath.row];
         importableviewcell.titleLab.text       = importableviewcell.detailModel.subject;
         importableviewcell.addressLab.text     = @"";

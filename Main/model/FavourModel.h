@@ -10,11 +10,11 @@
 
 @interface FavourModel : NSObject
 /** 点赞id */
-@property (nonatomic, assign)  NSInteger favour_id;
+@property (nonatomic, copy)    NSString  *favour_id;
 /** 主题帖id */
 @property (nonatomic, assign)  NSInteger tid;
 /** 用户id */
-@property (nonatomic, assign)  NSInteger uid;
+@property (nonatomic, copy)    NSString  *uid;
 /** 用户头像 */
 @property (nonatomic, copy)    NSString  *userImage;
 

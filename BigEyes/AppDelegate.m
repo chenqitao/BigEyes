@@ -24,6 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [self customizeInterface];
+    [self saveUserInformation];
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -35,9 +36,20 @@
     sideMenuViewController.backgroundImage = [UIImage imageNamed:@"sideground"];
     self.window.rootViewController = sideMenuViewController;
     [self.window makeKeyAndVisible];
-    
+
     // Override point for customization after application launch.
     return YES;
+}
+
+
+/**
+ *  先留着，做测试用，以后登录再改
+ */
+- (void)saveUserInformation {
+    [TTUserDefaultTool setObject:@"bfa443173b16f18371120a95c3ee3c60" forKey:TTSessionid];
+    [TTUserDefaultTool setObject:@"11" forKey:TTuid];
+   
+ 
 }
 
 
