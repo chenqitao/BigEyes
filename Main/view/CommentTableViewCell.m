@@ -24,11 +24,16 @@
     
     _Icon = [UIImageView new];
     [self.contentView addSubview:_Icon];
+    //设置圆角以及边框颜色
+    _Icon.layer.cornerRadius = 50/2;
+    [_Icon.layer setMasksToBounds:YES];
+    _Icon.layer.borderWidth  = 1;
+    _Icon.layer.borderColor  = TTColor(255, 48, 48, 1).CGColor;
     [_Icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(10);
         make.top.equalTo(self.contentView.mas_top).with.offset(5);
-        make.width.equalTo(@60);
-        make.height.equalTo(@60);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
     }];
     
     _nameLab = [UILabel new];
@@ -58,22 +63,25 @@
     _commentLab.lineBreakMode = NSLineBreakByCharWrapping;
     _commentLab.numberOfLines = 0;
     [_commentLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_Icon.mas_right).with.offset(5);
-        make.top.equalTo(_nameLab.mas_bottom).with.offset(5);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-5);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-5);
+        make.left.equalTo(self.contentView.mas_left).with.offset(65);
+        make.top.equalTo(self.contentView.mas_top).with.offset(30);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-10);
     }];
     
     
 }
 
--(void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
     [self.contentView setNeedsLayout];
     [self.contentView layoutIfNeeded];
     _commentLab.preferredMaxLayoutWidth = CGRectGetWidth(_commentLab.frame);
-    
+   
+
+
 }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

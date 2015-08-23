@@ -261,6 +261,7 @@
         [self configureCell:cell withIndexPath:indexPath];
         return cell;
     }
+    
     else {
         CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!cell) {
@@ -275,7 +276,6 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath {
-    
     if (indexPath.row == 0) {
         ImporTableViewCell *importableviewcell = (ImporTableViewCell *)cell;
         UIImage *favourBtnimage = isfavour == YES?[UIImage imageNamed:@"is_favour_yes"]:[UIImage imageNamed:@"is_favour_no"];
@@ -293,7 +293,14 @@
         }
         importableviewcell.scroll.contentSize  = CGSizeMake(TTFavouruserImage*favourArr.count, TTFavouruserImage);
         for (int i=0;i<favourArr.count;i++ ) {
-            UIImageView *userImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*(TTFavouruserImage+10), 0, TTFavouruserImage, TTFavouruserImage)];
+            UIImageView *userImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*(TTFavouruserImage+10)+10, 0, TTFavouruserImage, TTFavouruserImage)];
+            
+        //设置圆角以及边框颜色
+            userImage.layer.cornerRadius = TTFavouruserImage/2;
+            [userImage.layer setMasksToBounds:YES];
+            userImage.layer.borderWidth  = 1;
+            userImage.layer.borderColor  = TTColor(255, 48, 48, 1).CGColor;
+            
             FavourModel *favourmodel = favourArr[i];
             [userImage sd_setImageWithURL:[NSURL URLWithString:favourmodel.userImage]];
             [importableviewcell.scroll addSubview:userImage];
@@ -314,9 +321,11 @@
     
     }
     else {
+       
         CommentTableViewCell *commenttablecell = (CommentTableViewCell *)cell;
         commenttablecell.detailModel           = dataSource[indexPath.row];
         commenttablecell.commentLab.text       = commenttablecell.detailModel.subject;
+//        commenttablecell.commentLab.text       = @"最近，一直在看浙江卫视的音乐节目《中国好声音》,最近，一直在看浙江卫视的音乐节目《中国好声音》";
         commenttablecell.nameLab.text          = commenttablecell.detailModel.username;
         commenttablecell.timeLab.text          = commenttablecell.detailModel.dateline;
         [commenttablecell.Icon sd_setImageWithURL:[NSURL URLWithString:commenttablecell.detailModel.avatar_url] placeholderImage:nil];
@@ -387,22 +396,37 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 150;
-    }
-    else  return 70;
 
-
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+  
     if (indexPath.row == 0) {
         return 150;
     }
-    else  return 70;
- 
+    else {
+        static NSString *identifier = @"cellID";
+        CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        [self configureCell:cell withIndexPath:indexPath];
+        if ([cell.detailModel.subject isEqualToString:@""]) {
+            return 60;
+        }
+        else {
+       
+            [cell setNeedsUpdateConstraints];
+            [cell updateConstraintsIfNeeded];
+            cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.bounds));
+            [cell setNeedsLayout];
+            [cell layoutIfNeeded];
+            CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+            return height;
+             }
+        }
+    
+  
 
 }
 
