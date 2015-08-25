@@ -25,6 +25,9 @@
     NSString       *focusid;            //关注id
     BOOL           isfavour;            //是否点赞
     BOOL           isfocus;             //是否关注
+    UIView         *bottomView;         //底部评论view
+    UITextField    *commenttextfield;   //评论输入框
+    UIButton       *sendBtn;            //发送按钮
     
 
 }
@@ -51,7 +54,28 @@
     [super viewDidLoad];
     
     [self setUpNavigtionBar];
+    [self setUpCommentView];
+    [self registNotification];
     // Do any additional setup after loading the view.
+}
+
+
+#pragma mark  键盘升落
+- (void)registNotification {
+
+    //使用NSNotificationCenter 鍵盤出現時
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(keyboardWasShow:)
+     
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    //使用NSNotificationCenter 鍵盤隐藏時
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(keyboardWillBeHidden:)
+     
+                                                 name:UIKeyboardWillHideNotification object:nil];
+
 }
 
 - (void)createUI {
@@ -107,7 +131,7 @@
     [self.view addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_naviView.mas_top).with.offset(15);
-        make.left.equalTo(_naviView.mas_left).with.offset(TTScreenWith/2-20);
+        make.left.equalTo(_naviView.mas_left).with.offset(TTScreenWidth/2-20);
         make.right.equalTo(_naviView.mas_right).with.offset(-50);
         make.bottom.equalTo(_naviView.mas_bottom).with.offset(-10);
     }];
@@ -133,6 +157,46 @@
     
 }
 
+- (void)setUpCommentView {
+    bottomView  = [UIView new];
+    [self.view addSubview:bottomView];
+    
+    commenttextfield = [UITextField new];
+    [bottomView addSubview:commenttextfield];
+    
+    sendBtn = [UIButton new];
+    [bottomView addSubview:sendBtn];
+    
+    bottomView.backgroundColor = TTColor(255, 0, 19, 1);
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.right.equalTo(self.view.mas_right).with.offset(0);
+        make.height.equalTo(@50);
+    }];
+    
+   
+    commenttextfield.placeholder = @"来说说呗";
+    commenttextfield.borderStyle = UITextBorderStyleRoundedRect;
+    [commenttextfield mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(bottomView.mas_left).with.offset(70*TTScreenWidth/640);
+        make.right.equalTo(sendBtn.mas_left).with.offset(-20*TTScreenWidth/640);
+        make.centerY.mas_equalTo(bottomView.mas_centerY);
+    }];
+    
+    [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+    [sendBtn bk_whenTapped:^{
+        [self sendComment];
+        [self.view endEditing:YES];
+        commenttextfield.text = @"";
+    }];
+    [sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(bottomView.mas_centerY);
+        make.right.equalTo(bottomView.mas_right).with.offset(-20);
+        make.width.equalTo(@50);
+    }];
+}
+
 
 
 - (void)createData {
@@ -150,15 +214,16 @@
         NSLog(@"error:%@",error);
     }];
     
+   
+    
 
 }
 
 #pragma mark   获取点赞列表
 - (void)loadFavourList {
-   
     favourArr = [[NSMutableArray alloc]init];
     [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTGetFavoutListURL parmars:@{@"tid":_tid} success:^(id responseObject) {
-       
+        
         NSArray *arr = responseObject[@"datas"];
         for (NSDictionary *dic in arr) {
             FavourModel *favourmodel = [FavourModel objectWithKeyValues:dic];
@@ -170,9 +235,10 @@
         }
         
         [self loadFocusList];
-      } fail:^(NSError *error) {
-          
-      }];
+    } fail:^(NSError *error) {
+        
+    }];
+ 
 
 }
 
@@ -237,6 +303,59 @@
             NSLog(@"error:%@",error);
         }];
         
+    }
+
+
+}
+
+#pragma mark  评论
+- (void)sendComment {
+    
+    if(![commenttextfield.text isEqualToString:@""]) {
+        
+    [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:[NSString stringWithFormat:@"%@&tid=%@",TTcommentURL,_tid]
+                                            parmars:@{@"sid":[TTUserDefaultTool objectForKey:TTSessionid],
+                                                      @"authorid":[TTUserDefaultTool objectForKey:TTuid],
+                                                      @"author":[TTUserDefaultTool objectForKey:TTname],
+                                                      @"subject":@"test",
+                                                      @"message":commenttextfield.text,
+                                                     
+                                                  }
+     success:^(id responseObject) {
+        [MBProgressHUD showMessageThenHide:@"评论成功" toView:self.view];
+        [self createData];
+       // [self moveToBottom];
+        
+         
+    } fail:^(NSError *error) {
+        NSLog(@"error:%@",error);
+        
+    }];
+        
+    }
+    else {
+        [MBProgressHUD showMessageThenHide:@"评论内容不能为空" toView:self.view];
+        
+    }
+
+
+}
+
+//tableview的scrollview移动到底部
+
+- (void)moveToBottom {
+    NSUInteger sectionCount = [mytableView numberOfSections];
+    
+    if (sectionCount) {
+        
+        NSUInteger rowCount = [mytableView numberOfRowsInSection:1];
+        if (rowCount) {
+            
+            NSUInteger ii[2] = {1, rowCount-1 };
+            NSIndexPath* indexPath = [NSIndexPath indexPathWithIndexes:ii length:2];
+            [mytableView scrollToRowAtIndexPath:indexPath
+                               atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
     }
 
 
@@ -324,8 +443,7 @@
        
         CommentTableViewCell *commenttablecell = (CommentTableViewCell *)cell;
         commenttablecell.detailModel           = dataSource[indexPath.row];
-        commenttablecell.commentLab.text       = commenttablecell.detailModel.subject;
-//        commenttablecell.commentLab.text       = @"最近，一直在看浙江卫视的音乐节目《中国好声音》,最近，一直在看浙江卫视的音乐节目《中国好声音》";
+        commenttablecell.commentLab.text       = commenttablecell.detailModel.message;
         commenttablecell.nameLab.text          = commenttablecell.detailModel.username;
         commenttablecell.timeLab.text          = commenttablecell.detailModel.dateline;
         [commenttablecell.Icon sd_setImageWithURL:[NSURL URLWithString:commenttablecell.detailModel.avatar_url] placeholderImage:nil];
@@ -429,6 +547,43 @@
   
 
 }
+
+
+#pragma mark  键盘升落方法
+
+- (void) keyboardWasShow:(NSNotification *) notif
+{
+    NSDictionary *info = [notif userInfo];
+    
+    NSValue *value = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
+    
+    CGSize keyboardSize = [value CGRectValue].size;
+    
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.frame = CGRectMake(0, -keyboardSize.height, TTScreenWidth, TTScreenHeight);
+        
+    }];
+    
+    
+}
+
+//当键盘隐藏的时候
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    NSDictionary *info = [aNotification userInfo];
+    float duration=[info [UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
+    
+    [UIView animateWithDuration:duration animations:^{
+        //[myTableView scrollRectToVisible:CGRectMake(0, 0, kWidth, kHeight) animated:YES];
+        self.view.frame = CGRectMake(0, 0, TTScreenWidth, TTScreenHeight );
+    }];
+    
+    
+    
+}
+
 
 
 

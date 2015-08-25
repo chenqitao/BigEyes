@@ -48,6 +48,7 @@
 - (void)saveUserInformation {
     [TTUserDefaultTool setObject:@"bfa443173b16f18371120a95c3ee3c60" forKey:TTSessionid];
     [TTUserDefaultTool setObject:@"11" forKey:TTuid];
+    [TTUserDefaultTool setObject:@"chenqitao" forKey:TTname];
    
  
 }

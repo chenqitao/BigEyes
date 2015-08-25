@@ -68,7 +68,7 @@
     CGFloat buttonW = tabBarView.frame.size.width / 3;
     CGFloat buttonH = tabBarView.frame.size.height;
     
-    customButton.frame = CGRectMake(TTScreenWith/3 * index, 0, buttonW, buttonH);
+    customButton.frame = CGRectMake(TTScreenWidth/3 * index, 0, buttonW, buttonH);
     [customButton setImage:[UIImage imageNamed:normal] forState:UIControlStateNormal];
     //[customButton setImage:[UIImage imageNamed:selected] forState:UIControlStateDisabled];
     //这里应该设置选中状态的图片。wsq

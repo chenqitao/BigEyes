@@ -24,6 +24,8 @@
 #import <UIImageView+WebCache.h>
 #import <RESideMenu.h>
 #import <CoreLocation/CoreLocation.h>
+#import "MBProgressHUD.h"
+#import "MBProgressHUD+Simple.h"
 
 
 

@@ -62,7 +62,7 @@
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_blurView.mas_left).with.offset(8);
         make.top.equalTo(_blurView.mas_top).with.offset(8);
-        make.width.equalTo(@(TTScreenWith-70));
+        make.width.equalTo(@(TTScreenWidth-70));
         make.height.equalTo(@40);
     }];
     

@@ -103,7 +103,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    return (TTScreenWith+180)/2;
+    return (TTScreenWidth+180)/2;
 }
 
 - (void)configureCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath {
