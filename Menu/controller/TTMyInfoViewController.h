@@ -7,7 +7,9 @@
 //
 
 #import "TTBaseViewController.h"
+#import "MyInfoModel.h"
 
 @interface TTMyInfoViewController : TTBaseViewController
+@property (nonatomic, strong) MyInfoModel *infoModel;
 
 @end

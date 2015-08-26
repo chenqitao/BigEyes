@@ -213,7 +213,10 @@
     } fail:^(NSError *error) {
         NSLog(@"error:%@",error);
     }];
+   
     
+  
+   
    
     
 
@@ -324,7 +327,7 @@
      success:^(id responseObject) {
         [MBProgressHUD showMessageThenHide:@"评论成功" toView:self.view];
         [self createData];
-       // [self moveToBottom];
+        [self moveToBottom];
         
          
     } fail:^(NSError *error) {
@@ -341,22 +344,22 @@
 
 }
 
-//tableview的scrollview移动到底部
+#pragma mark tableview的scrollview移动到底部
 
 - (void)moveToBottom {
-    NSUInteger sectionCount = [mytableView numberOfSections];
-    
-    if (sectionCount) {
-        
-        NSUInteger rowCount = [mytableView numberOfRowsInSection:1];
-        if (rowCount) {
-            
-            NSUInteger ii[2] = {1, rowCount-1 };
-            NSIndexPath* indexPath = [NSIndexPath indexPathWithIndexes:ii length:2];
-            [mytableView scrollToRowAtIndexPath:indexPath
-                               atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        }
-    }
+//    NSUInteger sectionCount = [mytableView numberOfSections];
+//    
+//    if (sectionCount) {
+//        
+//        NSUInteger rowCount = [mytableView numberOfRowsInSection:1];
+//        if (rowCount) {
+//            
+//            NSUInteger ii[2] = {1, rowCount-1 };
+//            NSIndexPath* indexPath = [NSIndexPath indexPathWithIndexes:ii length:2];
+//            [mytableView scrollToRowAtIndexPath:indexPath
+//                               atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//        }
+//    }
 
 
 }
@@ -445,7 +448,7 @@
         commenttablecell.detailModel           = dataSource[indexPath.row];
         commenttablecell.commentLab.text       = commenttablecell.detailModel.message;
         commenttablecell.nameLab.text          = commenttablecell.detailModel.username;
-        commenttablecell.timeLab.text          = commenttablecell.detailModel.dateline;
+        commenttablecell.timeLab.text          = [NSString dateFormaterWithTime:commenttablecell.detailModel.dateline];
         [commenttablecell.Icon sd_setImageWithURL:[NSURL URLWithString:commenttablecell.detailModel.avatar_url] placeholderImage:nil];
       
         
@@ -548,6 +551,11 @@
 
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    [self.view endEditing:YES];
+}
+
 
 #pragma mark  键盘升落方法
 
@@ -579,10 +587,11 @@
         //[myTableView scrollRectToVisible:CGRectMake(0, 0, kWidth, kHeight) animated:YES];
         self.view.frame = CGRectMake(0, 0, TTScreenWidth, TTScreenHeight );
     }];
-    
-    
+  
     
 }
+
+
 
 
 

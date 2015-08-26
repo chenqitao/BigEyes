@@ -10,6 +10,7 @@
 #import "ImageModel.h"
 #import "ImageTableViewCell.h"
 #import "TTdetailViewController.h"
+#import "MapViewController.h"
 
 
 @interface ImageListViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -43,6 +44,9 @@
     mytableView.delegate = self;
     mytableView.dataSource = self;
     mytableView.delaysContentTouches = NO;
+    
+   //MJRefresh添加，和github上教程不一样
+    [mytableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     [mytableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
         
@@ -64,6 +68,10 @@
 
 }
 
+- (void)refreshData {
+    [self createData];
+}
+
 - (void)createData {
     pageno = 1;
     pagesize = 10;
@@ -73,6 +81,8 @@
         ImageModel  *imageModel = [ImageModel objectWithKeyValues:dic];
         [dataSource addObject:imageModel];
         }
+        [mytableView.header endRefreshing];
+      
         [mytableView reloadData];
     } fail:^(NSError *error) {
         NSLog(@"error:%@",error);
@@ -113,7 +123,7 @@
     [imageTableViewCell.backgroundImage sd_setImageWithURL:[NSURL URLWithString:imageTableViewCell.imagemodel.snapurl]placeholderImage:[UIImage imageNamed:@"placeholder"]];
     [imageTableViewCell.userImage sd_setImageWithURL:[NSURL URLWithString:imageTableViewCell.imagemodel.userImage] placeholderImage:nil];
     imageTableViewCell.titleLab.text       = imageTableViewCell.imagemodel.subject;
-    imageTableViewCell.time.text           = [self dateFormaterWithTime:imageTableViewCell.imagemodel.dateline];
+    imageTableViewCell.time.text           = [NSString dateFormaterWithTime:imageTableViewCell.imagemodel.dateline];
     imageTableViewCell.commentBtn.tag      = 7000+indexPath.row;
     [imageTableViewCell.commentBtn bk_whenTapped:^{
         NSLog(@"%ld",imageTableViewCell.commentBtn.tag);
@@ -145,24 +155,12 @@
 
 
 
-
-#pragma mark  格式化时间戳
-- (NSString *)dateFormaterWithTime:(NSNumber *)time {
-   
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[time doubleValue]] ;
-    
-    NSDateFormatter *formater = [[NSDateFormatter alloc]init];
-    
-    [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
-    return [formater stringFromDate:date];
-
-
-}
-
-
 #pragma mark 弹出menu视图
 - (void)pushmap {
-
+    MapViewController *mapVC = [[MapViewController alloc]init];
+    mapVC.haveBack = YES;
+    mapVC.showNavi = YES;
+    [self.navigationController pushViewController:mapVC animated:YES];
 }
 
 #pragma mark 弹出地图

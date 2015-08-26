@@ -18,17 +18,13 @@
 #define naviH 64
 
 
-#import "TTHTTPRequest.h"
-#import "TTUserDefaultTool.h"
-
-
 #define TTSessionid @"sessionid"
 #define TTuid       @"uid"
 #define TTpassword  @"password"
 #define TTname      @"name"
 
 
-
+#define MapKey      @"b48a23bbfcc57b6a89631a63a205cfc9"
 
 
 
@@ -44,6 +40,8 @@
 #define TTFocusURL         @"/huhu/upload/discuz2app1/topicpost.php?type=focus"
 #define TTDeleteFocusURL   @"/huhu/upload/discuz2app1/topicpost.php?type=deletefocus"
 #define TTcommentURL       @"/huhu/upload/discuz2app1/topicpost.php?type=reply&fid=2"
+#define TTGetUserInfoURL   @"/huhu/upload/discuz2app1/setuserinfo.php?type=Select"
+
 
 
 

@@ -17,7 +17,7 @@
 /** 是否开放 */
 @property (nonatomic, assign)  BOOL  closed;
 /** 发表时间 */
-@property (nonatomic, assign)  NSNumber *dateline;
+@property (nonatomic, copy)  NSString *dateline;
 /** 分类id */
 @property (nonatomic, assign)  NSInteger fid;
 /** 回复数 */

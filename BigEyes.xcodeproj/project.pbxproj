@@ -8,6 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		9EE59D659A8610226602AF6A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9706D994C62315383FA0BBF /* libPods.a */; };
+		AF1E23631B8C1D7D00F0EACB /* NSString+DateFormater.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E23621B8C1D7C00F0EACB /* NSString+DateFormater.m */; };
+		AF1E236D1B8C52DB00F0EACB /* GlowImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E23661B8C52DB00F0EACB /* GlowImageView.m */; };
+		AF1E236E1B8C52DB00F0EACB /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E23681B8C52DB00F0EACB /* MenuButton.m */; };
+		AF1E236F1B8C52DB00F0EACB /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E236A1B8C52DB00F0EACB /* MenuItem.m */; };
+		AF1E23701B8C52DB00F0EACB /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E236C1B8C52DB00F0EACB /* MenuView.m */; };
+		AF1E23771B8C54DE00F0EACB /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E23761B8C54DE00F0EACB /* MapViewController.m */; };
+		AF1E237F1B8C5CDD00F0EACB /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E237E1B8C5CDD00F0EACB /* libstdc++.6.0.9.dylib */; };
+		AF1E23811B8C5CE500F0EACB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E23801B8C5CE500F0EACB /* Security.framework */; };
+		AF1E23831B8C5CEF00F0EACB /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E23821B8C5CEF00F0EACB /* libstdc++.dylib */; };
+		AF1E23851B8C5CF900F0EACB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E23841B8C5CF900F0EACB /* CoreLocation.framework */; };
+		AF1E23871B8C5D0300F0EACB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E23861B8C5D0300F0EACB /* CoreTelephony.framework */; };
+		AF1E23891B8C5D1100F0EACB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E23881B8C5D1100F0EACB /* SystemConfiguration.framework */; };
+		AF1E238B1B8C5D1900F0EACB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E238A1B8C5D1900F0EACB /* libz.dylib */; };
+		AF1E238D1B8C5D2800F0EACB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E238C1B8C5D2800F0EACB /* QuartzCore.framework */; };
+		AF1E238F1B8C5D3200F0EACB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E238E1B8C5D3200F0EACB /* OpenGLES.framework */; };
+		AF1E23911B8C5D4400F0EACB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E23901B8C5D4400F0EACB /* CoreGraphics.framework */; };
+		AF1E23961B8D602400F0EACB /* MyInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E23951B8D602400F0EACB /* MyInfoModel.m */; };
+		AF1E23991B8DA58F00F0EACB /* TTFocusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E23981B8DA58F00F0EACB /* TTFocusTableViewCell.m */; };
 		AF50DD5D1B7D95F200A0AFB3 /* TTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF50DD331B7D95F200A0AFB3 /* TTBaseViewController.m */; };
 		AF50DD5E1B7D95F200A0AFB3 /* TTBaseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF50DD351B7D95F200A0AFB3 /* TTBaseWebViewController.m */; };
 		AF50DD5F1B7D95F200A0AFB3 /* TTHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF50DD3D1B7D95F200A0AFB3 /* TTHTTPRequest.m */; };
@@ -53,6 +71,35 @@
 /* Begin PBXFileReference section */
 		7AA8000212493F6251D7A572 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8202FAC640897CA484C39782 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		AF1E23611B8C1D7C00F0EACB /* NSString+DateFormater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DateFormater.h"; sourceTree = "<group>"; };
+		AF1E23621B8C1D7C00F0EACB /* NSString+DateFormater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DateFormater.m"; sourceTree = "<group>"; };
+		AF1E23651B8C52DB00F0EACB /* GlowImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlowImageView.h; sourceTree = "<group>"; };
+		AF1E23661B8C52DB00F0EACB /* GlowImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlowImageView.m; sourceTree = "<group>"; };
+		AF1E23671B8C52DB00F0EACB /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuButton.h; sourceTree = "<group>"; };
+		AF1E23681B8C52DB00F0EACB /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButton.m; sourceTree = "<group>"; };
+		AF1E23691B8C52DB00F0EACB /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
+		AF1E236A1B8C52DB00F0EACB /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
+		AF1E236B1B8C52DB00F0EACB /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
+		AF1E236C1B8C52DB00F0EACB /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
+		AF1E23751B8C54DE00F0EACB /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		AF1E23761B8C54DE00F0EACB /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		AF1E23781B8C5C1D00F0EACB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		AF1E237A1B8C5CC700F0EACB /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = "Map SDK/AMapSearchKit.framework"; sourceTree = "<group>"; };
+		AF1E237B1B8C5CC700F0EACB /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = "Map SDK/MAMapKit.framework"; sourceTree = "<group>"; };
+		AF1E237E1B8C5CDD00F0EACB /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		AF1E23801B8C5CE500F0EACB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AF1E23821B8C5CEF00F0EACB /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		AF1E23841B8C5CF900F0EACB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AF1E23861B8C5D0300F0EACB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		AF1E23881B8C5D1100F0EACB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AF1E238A1B8C5D1900F0EACB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AF1E238C1B8C5D2800F0EACB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AF1E238E1B8C5D3200F0EACB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		AF1E23901B8C5D4400F0EACB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AF1E23941B8D602400F0EACB /* MyInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoModel.h; sourceTree = "<group>"; };
+		AF1E23951B8D602400F0EACB /* MyInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoModel.m; sourceTree = "<group>"; };
+		AF1E23971B8DA58F00F0EACB /* TTFocusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTFocusTableViewCell.h; sourceTree = "<group>"; };
+		AF1E23981B8DA58F00F0EACB /* TTFocusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTFocusTableViewCell.m; sourceTree = "<group>"; };
 		AF50DD321B7D95F200A0AFB3 /* TTBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTBaseViewController.h; sourceTree = "<group>"; };
 		AF50DD331B7D95F200A0AFB3 /* TTBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTBaseViewController.m; sourceTree = "<group>"; };
 		AF50DD341B7D95F200A0AFB3 /* TTBaseWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTBaseWebViewController.h; sourceTree = "<group>"; };
@@ -114,8 +161,8 @@
 		AFDBBB401B83217B00693BDB /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
 		AFDBBB421B842CDC00693BDB /* FavourModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavourModel.h; sourceTree = "<group>"; };
 		AFDBBB431B842CDC00693BDB /* FavourModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavourModel.m; sourceTree = "<group>"; };
-		AFDBBB451B842CEC00693BDB /* FocusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusModel.h; sourceTree = "<group>"; };
-		AFDBBB461B842CEC00693BDB /* FocusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusModel.m; sourceTree = "<group>"; };
+		AFDBBB451B842CEC00693BDB /* FocusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FocusModel.h; path = ../../Main/model/FocusModel.h; sourceTree = "<group>"; };
+		AFDBBB461B842CEC00693BDB /* FocusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FocusModel.m; path = ../../Main/model/FocusModel.m; sourceTree = "<group>"; };
 		C9706D994C62315383FA0BBF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -124,6 +171,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF1E23911B8C5D4400F0EACB /* CoreGraphics.framework in Frameworks */,
+				AF1E238F1B8C5D3200F0EACB /* OpenGLES.framework in Frameworks */,
+				AF1E238D1B8C5D2800F0EACB /* QuartzCore.framework in Frameworks */,
+				AF1E238B1B8C5D1900F0EACB /* libz.dylib in Frameworks */,
+				AF1E23891B8C5D1100F0EACB /* SystemConfiguration.framework in Frameworks */,
+				AF1E23871B8C5D0300F0EACB /* CoreTelephony.framework in Frameworks */,
+				AF1E23851B8C5CF900F0EACB /* CoreLocation.framework in Frameworks */,
+				AF1E23831B8C5CEF00F0EACB /* libstdc++.dylib in Frameworks */,
+				AF1E23811B8C5CE500F0EACB /* Security.framework in Frameworks */,
+				AF1E237F1B8C5CDD00F0EACB /* libstdc++.6.0.9.dylib in Frameworks */,
 				9EE59D659A8610226602AF6A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +195,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF1E23641B8C52DB00F0EACB /* SinaMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				AF1E23651B8C52DB00F0EACB /* GlowImageView.h */,
+				AF1E23661B8C52DB00F0EACB /* GlowImageView.m */,
+				AF1E23671B8C52DB00F0EACB /* MenuButton.h */,
+				AF1E23681B8C52DB00F0EACB /* MenuButton.m */,
+				AF1E23691B8C52DB00F0EACB /* MenuItem.h */,
+				AF1E236A1B8C52DB00F0EACB /* MenuItem.m */,
+				AF1E236B1B8C52DB00F0EACB /* MenuView.h */,
+				AF1E236C1B8C52DB00F0EACB /* MenuView.m */,
+			);
+			path = SinaMenuView;
+			sourceTree = "<group>";
+		};
+		AF1E23711B8C540100F0EACB /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				AF1E23721B8C540100F0EACB /* controller */,
+				AF1E23731B8C540100F0EACB /* model */,
+				AF1E23741B8C540100F0EACB /* view */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		AF1E23721B8C540100F0EACB /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				AF1E23751B8C54DE00F0EACB /* MapViewController.h */,
+				AF1E23761B8C54DE00F0EACB /* MapViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		AF1E23731B8C540100F0EACB /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		AF1E23741B8C540100F0EACB /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		AF50DD301B7D95F200A0AFB3 /* base */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +319,7 @@
 		AF50DD431B7D95F200A0AFB3 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				AF1E23641B8C52DB00F0EACB /* SinaMenuView */,
 				AF50DD441B7D95F200A0AFB3 /* MBProgressHUD */,
 			);
 			path = Library;
@@ -297,8 +403,6 @@
 				AFDBBB3A1B830FD400693BDB /* DetailImageModel.m */,
 				AFDBBB421B842CDC00693BDB /* FavourModel.h */,
 				AFDBBB431B842CDC00693BDB /* FavourModel.m */,
-				AFDBBB451B842CEC00693BDB /* FocusModel.h */,
-				AFDBBB461B842CEC00693BDB /* FocusModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -321,6 +425,8 @@
 			children = (
 				AF50DD6B1B7D969600A0AFB3 /* TTUserDefaultTool.h */,
 				AF50DD6C1B7D969600A0AFB3 /* TTUserDefaultTool.m */,
+				AF1E23611B8C1D7C00F0EACB /* NSString+DateFormater.h */,
+				AF1E23621B8C1D7C00F0EACB /* NSString+DateFormater.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -328,6 +434,7 @@
 		AFA51B9D1B7D903D00EB08B9 = {
 			isa = PBXGroup;
 			children = (
+				AF1E23711B8C540100F0EACB /* Map */,
 				AFDBBB201B82356600693BDB /* Menu */,
 				AF50DD6A1B7D969600A0AFB3 /* Tool */,
 				AF50DD301B7D95F200A0AFB3 /* base */,
@@ -420,6 +527,10 @@
 		AFDBBB221B82356600693BDB /* model */ = {
 			isa = PBXGroup;
 			children = (
+				AFDBBB451B842CEC00693BDB /* FocusModel.h */,
+				AFDBBB461B842CEC00693BDB /* FocusModel.m */,
+				AF1E23941B8D602400F0EACB /* MyInfoModel.h */,
+				AF1E23951B8D602400F0EACB /* MyInfoModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -429,6 +540,8 @@
 			children = (
 				AFDBBB271B82CEEB00693BDB /* TTMenuTableViewCell.h */,
 				AFDBBB281B82CEEB00693BDB /* TTMenuTableViewCell.m */,
+				AF1E23971B8DA58F00F0EACB /* TTFocusTableViewCell.h */,
+				AF1E23981B8DA58F00F0EACB /* TTFocusTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -436,6 +549,19 @@
 		B5A887E45188866F545A19A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF1E23901B8C5D4400F0EACB /* CoreGraphics.framework */,
+				AF1E238E1B8C5D3200F0EACB /* OpenGLES.framework */,
+				AF1E238C1B8C5D2800F0EACB /* QuartzCore.framework */,
+				AF1E238A1B8C5D1900F0EACB /* libz.dylib */,
+				AF1E23881B8C5D1100F0EACB /* SystemConfiguration.framework */,
+				AF1E23861B8C5D0300F0EACB /* CoreTelephony.framework */,
+				AF1E23841B8C5CF900F0EACB /* CoreLocation.framework */,
+				AF1E23821B8C5CEF00F0EACB /* libstdc++.dylib */,
+				AF1E23801B8C5CE500F0EACB /* Security.framework */,
+				AF1E237E1B8C5CDD00F0EACB /* libstdc++.6.0.9.dylib */,
+				AF1E237A1B8C5CC700F0EACB /* AMapSearchKit.framework */,
+				AF1E237B1B8C5CC700F0EACB /* MAMapKit.framework */,
+				AF1E23781B8C5C1D00F0EACB /* MapKit.framework */,
 				C9706D994C62315383FA0BBF /* libPods.a */,
 			);
 			name = Frameworks;
@@ -583,20 +709,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF1E23631B8C1D7D00F0EACB /* NSString+DateFormater.m in Sources */,
+				AF1E23961B8D602400F0EACB /* MyInfoModel.m in Sources */,
 				AFDBBB1C1B7DD79700693BDB /* ImageModel.m in Sources */,
 				AF50DD5E1B7D95F200A0AFB3 /* TTBaseWebViewController.m in Sources */,
+				AF1E236E1B8C52DB00F0EACB /* MenuButton.m in Sources */,
 				AFDBBB291B82CEEB00693BDB /* TTMenuTableViewCell.m in Sources */,
 				AFDBBB411B83217B00693BDB /* CommentTableViewCell.m in Sources */,
 				AF50DD5D1B7D95F200A0AFB3 /* TTBaseViewController.m in Sources */,
 				AF50DD631B7D95F200A0AFB3 /* MBProgressHUD+Simple.m in Sources */,
 				AFDBBB351B82D7E700693BDB /* TTSettingsViewController.m in Sources */,
+				AF1E236F1B8C52DB00F0EACB /* MenuItem.m in Sources */,
 				AFDBBB441B842CDC00693BDB /* FavourModel.m in Sources */,
 				AFA51BAF1B7D903D00EB08B9 /* AppDelegate.m in Sources */,
 				AFDBBB321B82D7D400693BDB /* TTFocusViewController.m in Sources */,
 				AFDBBB261B8235EE00693BDB /* TTMenuViewController.m in Sources */,
 				AFDBBB1F1B7DE23200693BDB /* ImageTableViewCell.m in Sources */,
+				AF1E23771B8C54DE00F0EACB /* MapViewController.m in Sources */,
 				AFDBBB471B842CEC00693BDB /* FocusModel.m in Sources */,
 				AF50DD701B7D9E8700A0AFB3 /* TTRegistViewController.m in Sources */,
+				AF1E23701B8C52DB00F0EACB /* MenuView.m in Sources */,
+				AF1E23991B8DA58F00F0EACB /* TTFocusTableViewCell.m in Sources */,
 				AF50DD5F1B7D95F200A0AFB3 /* TTHTTPRequest.m in Sources */,
 				AFDBBB3B1B830FD400693BDB /* DetailImageModel.m in Sources */,
 				AF50DD6D1B7D969600A0AFB3 /* TTUserDefaultTool.m in Sources */,
@@ -607,6 +740,7 @@
 				AF50DD611B7D95F200A0AFB3 /* TTRootViewController.m in Sources */,
 				AF50DD641B7D95F200A0AFB3 /* MBProgressHUD.m in Sources */,
 				AFA51BAC1B7D903D00EB08B9 /* main.m in Sources */,
+				AF1E236D1B8C52DB00F0EACB /* GlowImageView.m in Sources */,
 				AFDBBB191B7DC76F00693BDB /* ImageListViewController.m in Sources */,
 				AFDBBB2F1B82D79C00693BDB /* TTAboutUsViewController.m in Sources */,
 				AF50DD621B7D95F200A0AFB3 /* MBProgressHUD+Add.m in Sources */,
@@ -719,6 +853,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Map",
+					SDK,
+					"$(PROJECT_DIR)/Map",
+					SDK,
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BigEyes/BigEyes.pch";
 				INFOPLIST_FILE = BigEyes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
@@ -733,6 +874,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Map",
+					SDK,
+					"$(PROJECT_DIR)/Map",
+					SDK,
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BigEyes/BigEyes.pch";
 				INFOPLIST_FILE = BigEyes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;

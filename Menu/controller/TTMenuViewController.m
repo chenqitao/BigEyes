@@ -12,6 +12,7 @@
 #import "TTAboutUsViewController.h"
 #import "TTFocusViewController.h"
 #import "TTSettingsViewController.h"
+#import "MyInfoModel.h"
 
 @interface TTMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -19,6 +20,7 @@
     UILabel        *nameLab;      //个性签名
     NSArray        *dataSource;   //title数据
     UITableView    *mytableView;
+    MyInfoModel    *infoModel;    //用户数据
     
 
 }
@@ -33,12 +35,38 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTGetUserInfoURL
+                                        parmars:@{@"sid":[TTUserDefaultTool objectForKey:TTSessionid],
+                                                  @"uid":[TTUserDefaultTool objectForKey:TTuid]}
+    success:^(id responseObject) {
+        
+         infoModel = [MyInfoModel objectWithKeyValues:responseObject[@"datas"][0]];
+        [IconImage sd_setImageWithURL:[NSURL URLWithString:infoModel.userImage]];
+        nameLab.text = infoModel.name;
+        
+    } fail:^(NSError *error) {
+        
+    }];
+
+}
+
 -(void)createUI {
     IconImage = [UIImageView new];
     [self.view addSubview:IconImage];
     IconImage.image = [UIImage imageNamed:@"placeholder"];
     IconImage.layer.cornerRadius = 40;
     [IconImage.layer setMasksToBounds:YES];
+    IconImage.userInteractionEnabled = YES;
+    [IconImage bk_whenTapped:^{
+        UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
+        TTMyInfoViewController *infoVC = [[TTMyInfoViewController alloc] init];
+        infoVC.showNavi = YES;
+        infoVC.haveBack = YES;
+        infoVC.infoModel = infoModel;
+        [nav pushViewController:infoVC animated:YES];
+        [self.sideMenuViewController hideMenuViewController];
+    }];
     [IconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).with.offset(31);
         make.left.equalTo(self.view.mas_left).with.offset(70);
@@ -79,6 +107,7 @@
 
 }
 
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 
@@ -116,6 +145,7 @@
             TTMyInfoViewController *infoVC = [[TTMyInfoViewController alloc] init];
             infoVC.showNavi = YES;
             infoVC.haveBack = YES;
+            infoVC.infoModel = infoModel;
             [nav pushViewController:infoVC animated:YES];
             [self.sideMenuViewController hideMenuViewController];
         }
@@ -153,5 +183,7 @@
     
     
 }
+
+
 
 @end
