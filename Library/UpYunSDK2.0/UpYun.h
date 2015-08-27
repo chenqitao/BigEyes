@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "MF_Base64Additions.h"
 #import "NSData+MD5Digest.h"
-#import "AFNetworking.h"
 #import "NSData+Utils.h"
 /**
  *	@brief 默认空间名（必填项），可在init之后修改bucket的值来更改
