@@ -24,12 +24,14 @@
 #define TTname      @"name"
 
 
+//第三方
 #define MapKey      @"b48a23bbfcc57b6a89631a63a205cfc9"
+#define UPYunurl    @"http://iscastest.b0.upaiyun.com"
 
 
 
 
-
+//自己的API
 #define TTImageListURL     @"/huhu/upload/discuz2app1/topiclist.php?type=second1"
 #define TTPostPictureURL   @"/huhu/upload/discuz2app1/topiclist.php?type=submit"
 #define TTGetDetailURL     @"/huhu/upload/discuz2app1/topiclist.php?type=thread_detail"
@@ -41,6 +43,7 @@
 #define TTDeleteFocusURL   @"/huhu/upload/discuz2app1/topicpost.php?type=deletefocus"
 #define TTcommentURL       @"/huhu/upload/discuz2app1/topicpost.php?type=reply&fid=2"
 #define TTGetUserInfoURL   @"/huhu/upload/discuz2app1/setuserinfo.php?type=Select"
+#define TTUploadFileURL    @"/huhu/upload/discuz2app1/topicpost.php?type=post1&fid=2&img=1"
 
 
 

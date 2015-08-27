@@ -81,10 +81,12 @@
 }
 
 - (void)createData {
+   
     pageno = 1;
     pagesize = 10;
     [[TTHTTPRequest shareHTTPRequest]openAPIGetToMethod:TTImageListURL parmars:@{@"pageno":[NSNumber numberWithInteger:pageno],@"pagesize":[NSNumber numberWithInteger:pagesize]} success:^(id responseObject) {
         NSArray *arr = responseObject[@"datas"];
+         [dataSource removeAllObjects];
         for (NSDictionary *dic in arr) {
         ImageModel  *imageModel = [ImageModel objectWithKeyValues:dic];
         [dataSource addObject:imageModel];
@@ -211,7 +213,7 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     //把data对象拷贝到沙盒中,并保存为image.png
     [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-    NSString *imageName = @"ypYun.png";
+    NSString *imageName = @"/ypYun.png";
     [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:imageName] contents:imageData attributes:nil];
     //得到选择后沙盒中图片的完整路径
     NSString  *imagesPath = [[NSString alloc] initWithFormat:@"%@%@", DocumentsPath,imageName];
@@ -223,6 +225,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [self.navigationController setNavigationBarHidden:NO];
+    [self createData];
 }
 
 

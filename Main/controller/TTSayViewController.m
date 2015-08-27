@@ -68,9 +68,86 @@
 
 - (void)upload {
     UpYun *upyun = [[UpYun alloc]init];
-   
+    upyun.successBlocker = ^(id data) {
+        NSDictionary *receiveData = data;
+        NSString *imageURL = [NSString stringWithFormat:@"%@%@",UPYunurl,receiveData[@"url"]];
+        [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTUploadFileURL
+                                        parmars:@{@"subject":textView.text,
+                                                  @"author":[TTUserDefaultTool objectForKey:TTname],
+                                                  @"authorid":[TTUserDefaultTool objectForKey:TTuid],
+                                                  @"sid":[TTUserDefaultTool objectForKey:TTSessionid],
+                                                  @"message":textView.text,
+                                                  @"userimage":imageURL,
+                                                  @"typeid":@"0",
+                                                  @"status":@"i",
+                                                  @"devicelat":@"26.625819",
+                                                  @"devicelng":@"106.642006"}
+        success:^(id responseObject) {
+            [MBProgressHUD showMessageThenHide:@"发表成功" toView:self.view];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        } fail:^(NSError *error) {
+            [MBProgressHUD showMessageThenHide:@"发表成功" toView:self.view];
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    
+    };
+    
+    upyun.failBlocker = ^(NSError * error)
+    {
+        NSString *message = [error.userInfo objectForKey:@"message"];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"error" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        NSLog(@"%@",error);
+    };
+    
+    upyun.progressBlocker = ^(CGFloat percent,long long requestDidSendBytes){
+        
+    };
+    
+    [upyun uploadFile:_holdImagePath saveKey:[self getSaveKey]];
 
 }
+
+#pragma mark 又拍云生成savekey方法
+-(NSString * )getSaveKey {
+    /**
+     *	@brief	方式1 由开发者生成saveKey
+     */
+    NSDate *d = [NSDate date];
+    return [NSString stringWithFormat:@"/%d/%d/%.0f.jpg",[self getYear:d],[self getMonth:d],[[NSDate date] timeIntervalSince1970]];
+    
+    /**
+     *	@brief	方式2 由服务器生成saveKey
+     */
+    //    return [NSString stringWithFormat:@"/{year}/{mon}/{filename}{.suffix}"];
+    
+    /**
+     *	@brief	更多方式 参阅 http://wiki.upyun.com/index.php?title=Policy_%E5%86%85%E5%AE%B9%E8%AF%A6%E8%A7%A3
+     */
+    
+}
+
+- (int)getYear:(NSDate *) date{
+    NSDateFormatter *formatter =[[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSYearCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    int year=[comps year];
+    return year;
+}
+
+- (int)getMonth:(NSDate *) date{
+    NSDateFormatter *formatter =[[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSMonthCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    int month = [comps month];
+    return month;
+}
+
 
 
 

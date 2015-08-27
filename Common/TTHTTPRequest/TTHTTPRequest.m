@@ -64,6 +64,7 @@ static NSString *baseURL = @"http://123.57.48.206";
 //         }
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"%@",error);
+         NSLog(@"parmars:%@",parmars);
          failedBlock(error);
      }];
 

@@ -101,7 +101,7 @@
     [self.view addSubview:headImage];
     [headImage sd_setImageWithURL:[NSURL URLWithString:_detailImageURL] placeholderImage:nil];
     [headImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(0);
+        make.top.equalTo(self.view.mas_top).with.offset(27);
         make.left.equalTo(self.view.mas_left).with.offset(0);
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.height.equalTo(@HeadViewHeight);
