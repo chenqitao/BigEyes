@@ -11,15 +11,16 @@
 #import "ImageTableViewCell.h"
 #import "TTdetailViewController.h"
 #import "MapViewController.h"
+#import "TTSayViewController.h"
 
-
-@interface ImageListViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ImageListViewController ()<UITableViewDataSource,UITableViewDelegate,DBCameraViewControllerDelegate>
 {
     UITableView    *mytableView;
     NSMutableArray *dataSource;   //数据源
     NSInteger      pageno;        //获取List的第几页
     NSInteger      pagesize;      //获取List的个数
     UIButton       *camaraBtn;    //大眼睛拍照按钮
+    NSString       *imagePath;    //取得图片的路径
    
    
 }
@@ -56,7 +57,14 @@
     [self.view addSubview:camaraBtn];
     [camaraBtn setImage:[UIImage imageNamed:@"cameraBtn"] forState:UIControlStateNormal];
     [camaraBtn bk_whenTapped:^{
-        NSLog(@"拍照");
+        //---------------------------调取相机--------------------------//
+        DBCameraContainerViewController *cameraContainer = [[DBCameraContainerViewController alloc] initWithDelegate:self];
+        [cameraContainer setFullScreenMode];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraContainer];
+        [nav setNavigationBarHidden:YES];
+        [self presentViewController:nav animated:YES completion:nil];
+       
+       
     }];
     [camaraBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
@@ -166,6 +174,49 @@
 #pragma mark 弹出地图
 - (void)pushmenu {
     [self presentLeftMenuViewController:self];
+
+}
+#pragma mark 相机代理方法
+
+- (void) camera:(id)cameraViewController didFinishWithImage:(UIImage *)image withMetadata:(NSDictionary *)metadata {
+    
+    //压缩图片
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    //将图片保存在沙盒目录中
+    imagePath = [self savetosambox:imageData];
+    
+    TTSayViewController *sayVC = [[TTSayViewController alloc]init];
+    sayVC.showNavi = YES;
+    sayVC.haveBack = YES;
+    sayVC.holdImagePath= imagePath;
+    [self.navigationController pushViewController:sayVC animated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [cameraViewController restoreFullScreenMode];
+}
+
+
+
+- (void) dismissCamera:(id)cameraViewController{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [cameraViewController restoreFullScreenMode];
+}
+
+
+
+#pragma mark 保存到沙盒中
+- (NSString *)savetosambox:(NSData *)imageData {
+    //把图片保存到documents目录中
+    NSString *DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    //把data对象拷贝到沙盒中,并保存为image.png
+    [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+    NSString *imageName = @"ypYun.png";
+    [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:imageName] contents:imageData attributes:nil];
+    //得到选择后沙盒中图片的完整路径
+    NSString  *imagesPath = [[NSString alloc] initWithFormat:@"%@%@", DocumentsPath,imageName];
+    return imagesPath;
+
 
 }
 

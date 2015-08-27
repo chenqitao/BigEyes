@@ -29,6 +29,9 @@
 #import "TTHTTPRequest.h"
 #import "TTUserDefaultTool.h"
 #import "NSString+DateFormater.h"
+#import <DBCameraContainerViewController.h>
+#import <DBCameraViewController.h>
+#import <UpYun.h>
 
 
 

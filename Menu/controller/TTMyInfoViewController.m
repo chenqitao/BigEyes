@@ -35,14 +35,7 @@
     IconImage.userInteractionEnabled = YES;
     IconImage.layer.borderWidth = 2;
     IconImage.layer.borderColor = TTColor(255, 0, 19, 1).CGColor;
-    [IconImage bk_whenTapped:^{
-        UINavigationController *nav = (UINavigationController *)self.sideMenuViewController.contentViewController;
-        TTMyInfoViewController *infoVC = [[TTMyInfoViewController alloc] init];
-        infoVC.showNavi = YES;
-        infoVC.haveBack = YES;
-        [nav pushViewController:infoVC animated:YES];
-        [self.sideMenuViewController hideMenuViewController];
-    }];
+
     [IconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).with.offset(100);
         make.centerX.equalTo(self.view.mas_centerX);

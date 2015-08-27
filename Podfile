@@ -14,3 +14,6 @@ pod 'MJRefresh', '~> 1.4.6'
 pod 'MJExtension', '~> 2.1.0'
 pod 'SDWebImage', '~> 3.7.2'
 pod 'XHRealTimeBlur', '~> 1.7'
+pod 'DBCamera', '~> 2.3.14'
+
+
