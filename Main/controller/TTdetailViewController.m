@@ -11,6 +11,10 @@
 #import "FavourModel.h"
 #import "ImporTableViewCell.h"
 #import "CommentTableViewCell.h"
+#import "MenuButton.h"
+#import "MenuItem.h"
+#import "MenuView.h"
+
 
 #define TTFavouruserImage 50
 @interface TTdetailViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -208,6 +212,7 @@
             [dataSource addObject:detailModel];
         }
         [self loadFavourList];
+        [[TMCache sharedCache]setObject:arr forKey:TTDetailData block:nil];
        
         
     } fail:^(NSError *error) {
@@ -236,6 +241,7 @@
                 favourid = favourmodel.favour_id;
             }
         }
+        [[TMCache sharedCache]setObject:arr forKey:TTFavourData block:nil];
         
         [self loadFocusList];
     } fail:^(NSError *error) {
@@ -344,11 +350,44 @@
 
 }
 
+#pragma mark 分享
+- (void)share {
+    NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:3];
+    MenuItem *menuItem = [[MenuItem alloc] initWithTitle:@"Sina" iconName:@"post_type_bubble_weibo" glowColor:[UIColor grayColor] index:1];
+    [items addObject:menuItem];
+    
+    MenuItem *menuItem1 = [[MenuItem alloc] initWithTitle:@"QQ" iconName:@"post_type_bubble_QQ" glowColor:[UIColor colorWithRed:0.000 green:0.840 blue:0.000 alpha:1.000] index:2];
+    [items addObject:menuItem1];
+    
+    MenuItem *menuItem2 = [[MenuItem alloc] initWithTitle:@"weichat" iconName:@"post_type_bubble_weichat" glowColor:[UIColor colorWithRed:0.687 green:0.000 blue:0.000 alpha:1.000] index:3];
+    [items addObject:menuItem2];
+    
+    
+    
+    MenuView *centerButton = [[MenuView alloc] initWithFrame:self.view.bounds items:items];
+    centerButton.didSelectedItemCompletion = ^(MenuItem *selectedItem) {
+        if (selectedItem) {
+            [self shareto:selectedItem.index];
+        }
+        
+    };
+    [centerButton showMenuAtView:self.view];
+
+
+
+}
+
+-(void )shareto:(NSUInteger )index{
+    
+  
+}
+
+
 #pragma mark tableview的scrollview移动到底部
 
 - (void)moveToBottom {
 //    NSUInteger sectionCount = [mytableView numberOfSections];
-//    
+//
 //    if (sectionCount) {
 //        
 //        NSUInteger rowCount = [mytableView numberOfRowsInSection:1];
@@ -370,7 +409,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return dataSource.count;
+    if ([[TMCache sharedCache] objectForKey:TTDetailData]) {
+        [dataSource removeAllObjects];
+        NSArray *dataArr = [[TMCache sharedCache] objectForKey:TTDetailData];
+        for (NSDictionary *dic in dataArr) {
+            DetailImageModel  *detailImageModel = [DetailImageModel objectWithKeyValues:dic];
+            [dataSource addObject:detailImageModel];
+        }
+        return dataSource.count;
+    } else {
+        return dataSource.count;
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -413,6 +463,8 @@
         for (UIView *obj in importableviewcell.scroll.subviews) {
             [obj removeFromSuperview];
         }
+       //判断缓存点赞数组是否为空，如为空则不改，如不为空则取缓存
+        favourArr = [[[TMCache sharedCache]objectForKey:TTFavourData]isKindOfClass:[NSNull class]]?favourArr:[[TMCache sharedCache]objectForKey:TTFavourData];
         importableviewcell.scroll.contentSize  = CGSizeMake(TTFavouruserImage*favourArr.count, TTFavouruserImage);
         for (int i=0;i<favourArr.count;i++ ) {
             UIImageView *userImage = [[UIImageView alloc]initWithFrame:CGRectMake(i*(TTFavouruserImage+10)+10, 0, TTFavouruserImage, TTFavouruserImage)];
@@ -423,7 +475,8 @@
             userImage.layer.borderWidth  = 1;
             userImage.layer.borderColor  = TTColor(255, 48, 48, 1).CGColor;
             
-            FavourModel *favourmodel = favourArr[i];
+        
+            FavourModel *favourmodel = [FavourModel objectWithKeyValues:favourArr[i]];
             [userImage sd_setImageWithURL:[NSURL URLWithString:favourmodel.userImage]];
             [importableviewcell.scroll addSubview:userImage];
         }
@@ -437,7 +490,7 @@
         }];
         
         [importableviewcell.shareBtn bk_whenTapped:^{
-            NSLog(@"分享");
+            [self share];
         }];
     
     
@@ -450,12 +503,8 @@
         commenttablecell.nameLab.text          = commenttablecell.detailModel.username;
         commenttablecell.timeLab.text          = [NSString dateFormaterWithTime:commenttablecell.detailModel.dateline];
         [commenttablecell.Icon sd_setImageWithURL:[NSURL URLWithString:commenttablecell.detailModel.avatar_url] placeholderImage:nil];
-      
-        
-        
+
     }
-    
-    
     
 }
 
@@ -468,7 +517,7 @@
         //记录出上一次滑动的距离，因为是在tableView的contentInset中偏移的ScrollHeadViewHeight，所以都得加回来
         CGFloat offsetY = scrollView.contentOffset.y;
         CGFloat delta   = offsetY - self.scrollY;  //与上次存放的值相减
-        self.scrollY = offsetY;
+        self.scrollY    = offsetY;
         
         
         //修改顶部的scrollHeadView位置 并且通知scrollHeadView内的控件也修改位置
@@ -481,9 +530,9 @@
     //根据偏移量算出alpha的值,渐隐,当偏移量大于-180开始计算消失的值
     CGFloat startF = -200;
     //初始的偏移量Y值为 顶部控件的高度
-    CGFloat initY = HeadViewHeight;
+    CGFloat initY  = HeadViewHeight;
     //缺少的那一段渐变Y值
-    CGFloat lackY = initY + startF;
+    CGFloat lackY  = initY + startF;
     //渐现alpha值
     CGFloat alphaScaleShow = (offsetY + initY - lackY) /  (initY - naviH  - lackY) ;
     
@@ -491,18 +540,18 @@
     if (alphaScaleShow >= 0.98) {
         //显示导航条
         [UIView animateWithDuration:0.04 animations:^{
-            self.naviView.alpha = 1;
+            self.naviView.alpha   = 1;
             self.titleLabel.alpha = 1;
         }];
     } else {
-        self.naviView.alpha = 0;
+        self.naviView.alpha   = 0;
         self.titleLabel.alpha = 0;
     }
     /**
      *  改变naviView的alpha值
      */
     
-    self.naviView.alpha = alphaScaleShow;
+    self.naviView.alpha   = alphaScaleShow;
     self.titleLabel.alpha = alphaScaleShow;
     
     
@@ -528,7 +577,7 @@
     }
     else {
         static NSString *identifier = @"cellID";
-        CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        CommentTableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!cell) {
             cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
@@ -567,8 +616,8 @@
     NSValue *value = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
     
     CGSize keyboardSize = [value CGRectValue].size;
-    
-    
+   //这里做一点小小的调整，解决键盘挡住输入框的问题
+    keyboardSize.height = keyboardSize.height == 216?252:keyboardSize.height;
     [UIView animateWithDuration:0.25 animations:^{
         self.view.frame = CGRectMake(0, -keyboardSize.height, TTScreenWidth, TTScreenHeight);
         
@@ -581,7 +630,7 @@
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
     NSDictionary *info = [aNotification userInfo];
-    float duration=[info [UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    float duration = [info [UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     
     [UIView animateWithDuration:duration animations:^{

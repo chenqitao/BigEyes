@@ -32,6 +32,7 @@
 #import <DBCameraContainerViewController.h>
 #import <DBCameraViewController.h>
 #import "UpYun.h"
+#import <XHRealTimeBlur.h>
 
 
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FavourModel : NSObject
+@interface FavourModel : NSObject<NSCopying,NSCoding>
 /** 点赞id */
 @property (nonatomic, copy)    NSString  *favour_id;
 /** 主题帖id */

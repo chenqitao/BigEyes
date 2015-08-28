@@ -30,6 +30,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
+    [self createFocuslistData];
+
+}
+
+- (void)createFocuslistData {
     [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTGetFocusListURL parmars:@{@"uid":[TTUserDefaultTool objectForKey:TTuid]} success:^(id responseObject) {
         NSArray *dataArr = responseObject[@"datas"];
         for (NSDictionary *dic in dataArr) {
@@ -37,15 +42,14 @@
             [dataSource addObject:focusModel];
         }
         [mytableView reloadData];
+        [[TMCache sharedCache]setObject:dataArr forKey:TTFocusData block:nil];
     } fail:^(NSError *error) {
         NSLog(@"error:%@",error);
     }];
-
 }
 
 - (void)createUI {
 
-    
     mytableView = [UITableView new];
     [self.view addSubview:mytableView];
     mytableView.delegate = self;
@@ -58,7 +62,6 @@
         
     }];
 
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -66,7 +69,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return dataSource.count;
+    if ([[TMCache sharedCache] objectForKey:TTFocusData]) {
+        [dataSource removeAllObjects];
+        NSArray *dataArr = [[TMCache sharedCache] objectForKey:TTFocusData];
+        for (NSDictionary *dic in dataArr) {
+            FocusModel  *focusModel = [FocusModel objectWithKeyValues:dic];
+            [dataSource addObject:focusModel];
+        }
+        return dataSource.count;
+    } else {
+        return dataSource.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -90,9 +103,9 @@
     importableviewcell.focusModel            = dataSource[indexPath.row];
     [importableviewcell.Icon sd_setImageWithURL:[NSURL URLWithString:importableviewcell.focusModel.avatar_url]];
     [importableviewcell.focusImage sd_setImageWithURL:[NSURL URLWithString:importableviewcell.focusModel.snapurl]];
-    importableviewcell.nameLab.text = importableviewcell.focusModel.username;
-    importableviewcell.timeLab.text = [NSString dateFormaterWithTime:importableviewcell.focusModel.dateline];
-    importableviewcell.subjectLab.text = importableviewcell.focusModel.subject;
+    importableviewcell.nameLab.text          = importableviewcell.focusModel.username;
+    importableviewcell.timeLab.text          = [NSString dateFormaterWithTime:importableviewcell.focusModel.dateline];
+    importableviewcell.subjectLab.text       = importableviewcell.focusModel.subject;
     
 }
 
@@ -110,7 +123,7 @@
     }
     detailVC.showNavi = NO;
     detailVC.haveBack = NO;
-    FocusModel *focusModel = dataSource[indexPath.row];
+    FocusModel *focusModel  = dataSource[indexPath.row];
     detailVC.detailImageURL = focusModel.snapurl;
     detailVC.tid            = focusModel.tid;
     [self.navigationController pushViewController:detailVC animated:YES];

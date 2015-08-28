@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DetailImageModel : NSObject
+@interface DetailImageModel : NSObject<NSCopying,NSCoding>
 /** 是否匿名 */
 @property (nonatomic, assign) BOOL anonymous;
 /** 附件 */

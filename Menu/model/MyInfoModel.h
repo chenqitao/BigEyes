@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MyInfoModel : NSObject
+@interface MyInfoModel : NSObject<NSCopying,NSCoding>
 /** 昵称 */
 @property (nonatomic, copy)  NSString *name;
 /** 用户头像 */

@@ -92,8 +92,9 @@
         [dataSource addObject:imageModel];
         }
         [mytableView.header endRefreshing];
-      
+        [[TMCache sharedCache] setObject:arr forKey:TTImageData block:nil];
         [mytableView reloadData];
+       
     } fail:^(NSError *error) {
         NSLog(@"error:%@",error);
     }];
@@ -103,7 +104,18 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return dataSource.count;
+    if ([[TMCache sharedCache] objectForKey:TTImageData]) {
+        [dataSource removeAllObjects];
+        NSArray *dataArr = [[TMCache sharedCache] objectForKey:TTImageData];
+        for (NSDictionary *dic in dataArr) {
+            ImageModel  *imageModel = [ImageModel objectWithKeyValues:dic];
+            [dataSource addObject:imageModel];
+        }
+        return dataSource.count;
+    } else {
+        return dataSource.count;
+    }
+   
     
 }
 
@@ -209,7 +221,7 @@
 #pragma mark 保存到沙盒中
 - (NSString *)savetosambox:(NSData *)imageData {
     //把图片保存到documents目录中
-    NSString *DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *DocumentsPath    = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     //把data对象拷贝到沙盒中,并保存为image.png
     [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];

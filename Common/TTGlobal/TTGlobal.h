@@ -18,15 +18,24 @@
 #define naviH 64
 
 
-#define TTSessionid @"sessionid"
-#define TTuid       @"uid"
-#define TTpassword  @"password"
-#define TTname      @"name"
+#define TTSessionid  @"sessionid"
+#define TTuid        @"uid"
+#define TTpassword   @"password"
+#define TTname       @"name"
 
 
 //第三方
-#define MapKey      @"b48a23bbfcc57b6a89631a63a205cfc9"
-#define UPYunurl    @"http://iscastest.b0.upaiyun.com"
+#define MapKey       @"b48a23bbfcc57b6a89631a63a205cfc9"
+#define UPYunurl     @"http://iscastest.b0.upaiyun.com"
+
+//主页面数据
+#define TTImageData  @"ImageData"
+//关注界面数据
+#define TTFocusData  @"FocusData"
+//点赞数组数据
+#define TTFavourData @"FavourData"
+//详情帖子数据
+#define TTDetailData @"DetailData"
 
 
 

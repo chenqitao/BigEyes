@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FocusModel : NSObject
+@interface FocusModel : NSObject<NSCopying,NSCoding>
 /** 附件id */
 @property (nonatomic, copy)  NSString *attachment;
 /** 作者id */

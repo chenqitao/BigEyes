@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ImageModel : NSObject
+@interface ImageModel : NSObject<NSCopying,NSCoding>
 
 /** 作者 */
 @property (nonatomic, copy)  NSString *author;
