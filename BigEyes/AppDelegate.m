@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ImageListViewController.h"
 #import "TTMenuViewController.h"
+#import "TTLoginViewController.h"
 
 
 @interface AppDelegate ()
@@ -22,19 +23,30 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     [self customizeInterface];
     [self saveUserInformation];
     
+    //注册Mob短信验证
+
+    [SMS_SDK registerApp:UMAPPKEY withSecret:UMAPPSecret];
+    
+    
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    ImageListViewController *imageVC = [[ImageListViewController alloc]init];
-    imageVC.showNavi = YES;
-    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:imageVC];
-    TTMenuViewController  *menuVC = [[TTMenuViewController alloc]init];
-    sideMenuViewController = [[RESideMenu alloc]initWithContentViewController:navVC leftMenuViewController:menuVC rightMenuViewController:nil];
-    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"sideground"];
-    self.window.rootViewController = sideMenuViewController;
+//    ImageListViewController *imageVC = [[ImageListViewController alloc]init];
+//    imageVC.showNavi = YES;
+//    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:imageVC];
+//    TTMenuViewController  *menuVC = [[TTMenuViewController alloc]init];
+//    sideMenuViewController = [[RESideMenu alloc]initWithContentViewController:navVC leftMenuViewController:menuVC rightMenuViewController:nil];
+//    sideMenuViewController.panGestureEnabled = YES;
+//    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"sideground"];
+//    self.window.rootViewController = sideMenuViewController;
+    TTLoginViewController *loginVC = [[TTLoginViewController alloc]init];
+    loginVC.showNavi = NO;
+    loginVC.haveBack = NO;
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 
     // Override point for customization after application launch.

@@ -17,16 +17,26 @@
 #define HeadViewHeight 200
 #define naviH 64
 
+//默认密码
+#define TTDefaultPwd @"0851888888"
+
 
 #define TTSessionid  @"sessionid"
 #define TTuid        @"uid"
 #define TTpassword   @"password"
 #define TTname       @"name"
 
+//textfield.tag
+#define SendtextfiledTag   1001
+#define VerifytextfiledTag 1002
+#define RegisttextfiledTag 1003
+
 
 //第三方
 #define MapKey       @"b48a23bbfcc57b6a89631a63a205cfc9"
 #define UPYunurl     @"http://iscastest.b0.upaiyun.com"
+#define UMAPPKEY     @"9fe57e168038"
+#define UMAPPSecret  @"98dbb3a57295d4be74f39d088b5ff707"
 
 //主页面数据
 #define TTImageData  @"ImageData"
@@ -53,6 +63,8 @@
 #define TTcommentURL       @"/huhu/upload/discuz2app1/topicpost.php?type=reply&fid=2"
 #define TTGetUserInfoURL   @"/huhu/upload/discuz2app1/setuserinfo.php?type=Select"
 #define TTUploadFileURL    @"/huhu/upload/discuz2app1/topicpost.php?type=post1&fid=2&img=1"
+#define TTRegistUCenterURL @"/huhu/upload/plugin.php?id=iphone:user&func=register"
+#define TTLoginURL         @"/huhu/upload/discuz2app1/login.php?type=onlinedo"
 
 
 

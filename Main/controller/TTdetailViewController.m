@@ -17,7 +17,7 @@
 
 
 #define TTFavouruserImage 50
-@interface TTdetailViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface TTdetailViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     UITableView    *mytableView;
     NSMutableArray *dataSource;         //model数据数组
@@ -204,6 +204,11 @@
 
 
 - (void)createData {
+    [self loadDetailList];
+}
+
+#pragma mark   获取详情列表
+- (void)loadDetailList {
     dataSource = [[NSMutableArray alloc]init];
     [[TTHTTPRequest shareHTTPRequest]openAPIGetToMethod:TTGetDetailURL parmars:@{@"tid":_tid,@"pageno":@"1",@"pagesize":@"20"} success:^(id responseObject) {
         NSArray *arr = responseObject[@"datas"];
@@ -213,17 +218,12 @@
         }
         [self loadFavourList];
         [[TMCache sharedCache]setObject:arr forKey:TTDetailData block:nil];
-       
         
     } fail:^(NSError *error) {
         NSLog(@"error:%@",error);
     }];
-   
-    
-  
-   
-   
-    
+
+
 
 }
 
@@ -386,20 +386,6 @@
 #pragma mark tableview的scrollview移动到底部
 
 - (void)moveToBottom {
-//    NSUInteger sectionCount = [mytableView numberOfSections];
-//
-//    if (sectionCount) {
-//        
-//        NSUInteger rowCount = [mytableView numberOfRowsInSection:1];
-//        if (rowCount) {
-//            
-//            NSUInteger ii[2] = {1, rowCount-1 };
-//            NSIndexPath* indexPath = [NSIndexPath indexPathWithIndexes:ii length:2];
-//            [mytableView scrollToRowAtIndexPath:indexPath
-//                               atScrollPosition:UITableViewScrollPositionTop animated:YES];
-//        }
-//    }
-
 
 }
 
@@ -640,6 +626,10 @@
   
     
 }
+
+
+
+
 
 
 

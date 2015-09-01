@@ -95,16 +95,13 @@
     
     upyun.failBlocker = ^(NSError * error)
     {
-        NSString *message = [error.userInfo objectForKey:@"message"];
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"error" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
-        NSLog(@"%@",error);
+        [MBProgressHUD showMessageThenHide:[error description] toView:self.view];
     };
     
     upyun.progressBlocker = ^(CGFloat percent,long long requestDidSendBytes){
         
     };
-    
+    //upyun上传图片
     [upyun uploadFile:_holdImagePath saveKey:[self getSaveKey]];
 
 }

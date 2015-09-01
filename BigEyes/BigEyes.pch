@@ -33,6 +33,7 @@
 #import <DBCameraViewController.h>
 #import "UpYun.h"
 #import <XHRealTimeBlur.h>
+#import <SMS_SDK/SMS_SDK.h>
 
 
 
