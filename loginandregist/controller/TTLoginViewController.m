@@ -10,8 +10,9 @@
 #import "TTRegistViewController.h"
 #import "TTSendView.h"
 #import "TTVerifyView.h"
-#import "CommonCrypto/CommonDigest.h"
 #import "ImageListViewController.h"
+#import "TTMenuViewController.h"
+
 
 
 @interface TTLoginViewController ()<UITextFieldDelegate>
@@ -30,6 +31,7 @@
     BOOL         isUpVerify;   //是否升起验证框
     NSTimer      *timers;      //定时器
     int          time;         //记录时间
+    RESideMenu   *sideMenuViewController;  //侧滑控制器
     
 }
 
@@ -233,17 +235,22 @@
             [SMS_SDK commitVerifyCode:toBeString result:^(enum SMS_ResponseState state) {
             if (state == 1) {
                 [MBProgressHUD showMessageThenHide:@"验证成功" toView:self.view];
-                [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTLoginURL parmars:@{@"useracc":numberfld.text,@"userpw":[self md5HexDigest:TTDefaultPwd]} success:^(id responseObject) {
+                [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTLoginURL parmars:@{@"useracc":sendView.numfld.text,@"userpw":[NSString md5HexDigest:TTDefaultPwd]} success:^(id responseObject) {
                     if (responseObject[@"datas"][0][@"uid"]&& ![responseObject[@"datas"][0][@"sessionid"] isEqualToString:@"aperror"]) {
                         [TTUserDefaultTool setObject:numberfld.text forKey:TTname];
-                        [TTUserDefaultTool setObject:[self md5HexDigest:TTDefaultPwd] forKey:TTpassword];
+                        [TTUserDefaultTool setObject:[NSString md5HexDigest:TTDefaultPwd] forKey:TTpassword];
                         [TTUserDefaultTool setObject:responseObject[@"datas"][0][@"sessionid"] forKey:TTSessionid];
                         [TTUserDefaultTool setObject:responseObject[@"datas"][0][@"uid"] forKey:TTuid];
                         
                         //跳到主界面
                         ImageListViewController *imageVC = [[ImageListViewController alloc]init];
-                        UINavigationController *nav      = [[UINavigationController alloc]initWithRootViewController:imageVC];
-                        self.view.window.rootViewController = nav;
+                        imageVC.showNavi = YES;
+                        UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:imageVC];
+                        TTMenuViewController  *menuVC = [[TTMenuViewController alloc]init];
+                        sideMenuViewController = [[RESideMenu alloc]initWithContentViewController:navVC leftMenuViewController:menuVC rightMenuViewController:nil];
+                        sideMenuViewController.panGestureEnabled = YES;
+                        sideMenuViewController.backgroundImage = [UIImage imageNamed:@"sideground"];
+                        self.view.window.rootViewController = sideMenuViewController;
                     }
                     
                     
@@ -262,7 +269,7 @@
         }
     }
     else {
-        if (toBeString.length >= 11 &&isUpVerify){
+        if (toBeString.length == 11 &&isUpVerify){
             verifyView = [[TTVerifyView alloc]initWithFrame:CGRectMake(0, sendView.frame.origin.y+100*TTScreenWidth/640,  TTScreenWidth, 100*TTScreenWidth/640)];
             verifyView.numfld.delegate = self;
             [self.view addSubview:verifyView];
@@ -275,57 +282,35 @@
             isUpVerify = !isUpVerify;
             
         }
-        if (toBeString .length >= 12) {
+        if (toBeString .length > 11) {
             
             return NO;
         }
         if (toBeString.length == 11) {
-            //关于这里为什么加定时器我也是醉了，因为如果不加的话，它只截取到10位数而我需要到11位
-            timers = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(handleMaxShowTimer:) userInfo:nil repeats:NO];
+            NSLog(@"%@",toBeString);
+            [MBProgressHUD showWindowMessageThenHide:@"正在获取验证码"];
+            //获取短信验证码
+            [SMS_SDK getVerificationCodeBySMSWithPhone:toBeString zone:@"86" result:^(SMS_SDKError *error) {
+                if (!error) {
+                    [MBProgressHUD showWindowSuccessThenHide:@"验证码发送成功"];
+                    
+                } else {
+                    [MBProgressHUD showWindowErrorThenHide:@"获取验证码失败"];
+                }
+            }];
             
         }
     
     }
-
            return YES;
    
 }
 
 
 
-//触发定时器
-- (void)handleMaxShowTimer:(NSTimer *)timer
-{
-    [MBProgressHUD showWindowMessageThenHide:@"正在获取验证码"];
-    //获取短信验证码
-    
-    [SMS_SDK getVerificationCodeBySMSWithPhone:sendView.numfld.text zone:@"86" result:^(SMS_SDKError *error) {
-        if (!error) {
-            [MBProgressHUD showWindowSuccessThenHide:@"验证码发送成功"];
-            
-        } else {
-            [MBProgressHUD showWindowErrorThenHide:@"获取验证码失败"];
-        }
-    }];
-    
-}
 
 
-#pragma -mark 对账户的密码进行加密
-- (NSString *)md5HexDigest:(NSString *)inPutText
-{
-    const char *cStr = [inPutText UTF8String];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(cStr, strlen(cStr), result);
-    
-    return [[NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
-             result[0], result[1], result[2], result[3],
-             result[4], result[5], result[6], result[7],
-             result[8], result[9], result[10], result[11],
-             result[12], result[13], result[14], result[15]
-             ] lowercaseString];
-    
-}
+
 
 
 

@@ -9,7 +9,8 @@
 #import "TTRegistViewController.h"
 #import "TTRegistView.h"
 #import "TTVerifyView.h"
-
+#import "ImageListViewController.h"
+#import "TTMenuViewController.h"
 
 @interface TTRegistViewController ()<UITextFieldDelegate>
 {
@@ -21,6 +22,7 @@
     TTRegistView *registView;  //注册窗口
     NSTimer      *timers;      //定时器
     int          time;         //记录时间
+    RESideMenu   *sideMenuViewController;  //侧滑控制器
 }
 
 @end
@@ -59,7 +61,6 @@
     bgImage.image = [blurFilter imageByFilteringImage:Image];
     [bgImage bk_whenTapped:^{
         [self.view endEditing:YES];
-        [verifyView removeFromSuperview];
     }];
     [bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
@@ -79,25 +80,17 @@
         make.width.equalTo(@25);
     }];
     
-    endRegBtn = [UIButton new];
-    [self.view addSubview:endRegBtn];
-    [endRegBtn setTitle:@"完成" forState:UIControlStateNormal];
-    [endRegBtn setTintColor:[UIColor whiteColor]];
-    [endRegBtn bk_whenTapped:^{
-        
-    }];
-    [endRegBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(20);
-        make.right.equalTo(self.view.mas_right).with.offset(-5);
-        make.height.equalTo(@20);
-        make.width.equalTo(@60);
-    }];
     
     //注册窗口
     registView = [[TTRegistView alloc]initWithFrame:CGRectMake(0, 300*TTScreenWidth/640, TTScreenWidth, 100*TTScreenWidth/640)];
     registView.numfld.delegate = self;
     [registView.resendBtn bk_whenTapped:^{
-        [self getVerifyCode];
+        [self getVerifyCode:registView.numfld.text];
+        verifyView = [[TTVerifyView alloc]initWithFrame:CGRectMake(0, registView.frame.origin.y, TTScreenWidth, 100*TTScreenWidth/640)];
+        [self.view addSubview:verifyView];
+        [UIView animateWithDuration:0.25 animations:^{
+            verifyView.frame = CGRectMake(0, verifyView.frame.origin.y+100*TTScreenWidth/640, TTScreenWidth, 100*TTScreenWidth/640);
+        }];
     }];
     [self.view addSubview:registView];
     
@@ -139,16 +132,46 @@
 
 #pragma mark 判断输入的字符规则
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (textField.tag == VerifytextfiledTag) {
         if (string.length == 4) {
-            NSLog(@"44444");
+          [SMS_SDK commitVerifyCode:toBeString result:^(enum SMS_ResponseState state) {
+              if (state == 1) {
+                  [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTRegistUCenterURL
+                    parmars:@{@"email":[NSString stringWithFormat:@"%@@qq.com",registView.numfld.text],
+                           @"username":registView.numfld.text,
+                           @"password":@"0851888888"}
+                  success:^(id responseObject) {
+                      
+                      if ([responseObject[@"code"]intValue] > 0) {
+                          [MBProgressHUD showMessageThenHide:@"注册成功" toView:self.view];
+                          [self activationUser];
+                          [self login];
+                          
+                      }
+                      else if ([responseObject[@"code"]intValue] == -6) {
+                          [MBProgressHUD showMessageThenHide:@"邮箱已被注册" toView:self.view];
+                      }
+                      else if ([responseObject[@"code"]intValue] == -3) {
+                          [self login];
+                      }
+                      
+                  } fail:^(NSError *error) {
+                      
+                  }];
+              }
+              else {
+               [MBProgressHUD showMessageThenHide:@"验证失败" toView:self.view];
+              }
+          }];
+
+           
         }
         
     }
     else {
-        NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-        
-        
+      
+  
         if (toBeString.length >= 11 && range.length != 1&&isUpVerify){
             verifyView = [[TTVerifyView alloc]initWithFrame:CGRectMake(0, registView.frame.origin.y, TTScreenWidth, 100*TTScreenWidth/640)];
             [self.view addSubview:verifyView];
@@ -160,13 +183,18 @@
             isUpVerify = !isUpVerify;
             
         }
-        if (toBeString .length > 11) {
+         if (toBeString .length > 11) {
             return NO;
         }
-        if (toBeString.length == 11) {
-            //关于这里为什么加定时器我也是醉了，因为如果不加的话，它只截取到10位数而我需要到11位
-            timers = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(handleMaxShowTimer:) userInfo:nil repeats:NO];
-            
+         if (toBeString.length == 11) {
+            [self getVerifyCode:toBeString];
+        }
+        //小于11则移除验证框
+         if (toBeString.length < 11) {
+            if (verifyView) {
+                [verifyView removeFromSuperview];
+                isUpVerify = YES;
+            }
         }
     
     
@@ -176,18 +204,14 @@
     
 }
 
-//触发定时器
-- (void)handleMaxShowTimer:(NSTimer *)timer
-{
-    [self getVerifyCode];
-}
+
 
 #pragma 获取验证码
-- (void)getVerifyCode {
+- (void)getVerifyCode:(NSString *)number{
     [MBProgressHUD showWindowMessageThenHide:@"正在获取验证码"];
     //获取短信验证码
     
-    [SMS_SDK getVerificationCodeBySMSWithPhone:registView.numfld.text zone:@"86" result:^(SMS_SDKError *error) {
+    [SMS_SDK getVerificationCodeBySMSWithPhone:number zone:@"86" result:^(SMS_SDKError *error) {
         if (!error) {
             [MBProgressHUD showWindowSuccessThenHide:@"验证码发送成功"];
             
@@ -197,6 +221,47 @@
     }];
 
 }
+
+#pragma 将UCenter中的用户激活
+- (void)activationUser {
+    [[TTHTTPRequest shareHTTPRequest]openAPIGetToMethod:TTactivationURL parmars:@{} success:^(id responseObject) {
+        
+    } fail:^(NSError *error) {
+        
+    }];
+
+
+}
+
+#pragma 登录 
+- (void)login {
+    [[TTHTTPRequest shareHTTPRequest]openAPIPostToMethod:TTLoginURL parmars:@{@"useracc":registView.numfld.text,@"userpw":[NSString md5HexDigest:TTDefaultPwd]} success:^(id responseObject) {
+        if (responseObject[@"datas"][0][@"uid"]&& ![responseObject[@"datas"][0][@"sessionid"] isEqualToString:@"aperror"]) {
+            [TTUserDefaultTool setObject:registView.numfld.text forKey:TTname];
+            [TTUserDefaultTool setObject:[NSString md5HexDigest:TTDefaultPwd] forKey:TTpassword];
+            [TTUserDefaultTool setObject:responseObject[@"datas"][0][@"sessionid"] forKey:TTSessionid];
+            [TTUserDefaultTool setObject:responseObject[@"datas"][0][@"uid"] forKey:TTuid];
+            
+            //跳到主界面
+            ImageListViewController *imageVC = [[ImageListViewController alloc]init];
+            imageVC.showNavi = YES;
+            UINavigationController  *navVC   = [[UINavigationController alloc]initWithRootViewController:imageVC];
+            TTMenuViewController     *menuVC = [[TTMenuViewController alloc]init];
+            sideMenuViewController = [[RESideMenu alloc]initWithContentViewController:navVC leftMenuViewController:menuVC rightMenuViewController:nil];
+            sideMenuViewController.panGestureEnabled = YES;
+            sideMenuViewController.backgroundImage = [UIImage imageNamed:@"sideground"];
+            self.view.window.rootViewController = sideMenuViewController;
+        }
+        
+        
+    } fail:^(NSError *error) {
+        
+    }];
+
+
+}
+
+
 
 
 

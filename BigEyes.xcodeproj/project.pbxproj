@@ -69,6 +69,7 @@
 		AFF873C81B9404F000DF92C9 /* TTSendView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF873C71B9404F000DF92C9 /* TTSendView.m */; };
 		AFF873CB1B957F9800DF92C9 /* TTRegistView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF873CA1B957F9800DF92C9 /* TTRegistView.m */; };
 		AFF873CE1B95879A00DF92C9 /* TTVerifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF873CD1B95879A00DF92C9 /* TTVerifyView.m */; };
+		AFF873D11B985BDD00DF92C9 /* NSString+md5String.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF873D01B985BDD00DF92C9 /* NSString+md5String.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +200,8 @@
 		AFF873CA1B957F9800DF92C9 /* TTRegistView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTRegistView.m; sourceTree = "<group>"; };
 		AFF873CC1B95879A00DF92C9 /* TTVerifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTVerifyView.h; sourceTree = "<group>"; };
 		AFF873CD1B95879A00DF92C9 /* TTVerifyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTVerifyView.m; sourceTree = "<group>"; };
+		AFF873CF1B985BDD00DF92C9 /* NSString+md5String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+md5String.h"; sourceTree = "<group>"; };
+		AFF873D01B985BDD00DF92C9 /* NSString+md5String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+md5String.m"; sourceTree = "<group>"; };
 		C9706D994C62315383FA0BBF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -534,6 +537,8 @@
 				AF50DD6C1B7D969600A0AFB3 /* TTUserDefaultTool.m */,
 				AF1E23611B8C1D7C00F0EACB /* NSString+DateFormater.h */,
 				AF1E23621B8C1D7C00F0EACB /* NSString+DateFormater.m */,
+				AFF873CF1B985BDD00DF92C9 /* NSString+md5String.h */,
+				AFF873D01B985BDD00DF92C9 /* NSString+md5String.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -862,6 +867,7 @@
 				AFA51BAC1B7D903D00EB08B9 /* main.m in Sources */,
 				AF1E236D1B8C52DB00F0EACB /* GlowImageView.m in Sources */,
 				AFDBBB191B7DC76F00693BDB /* ImageListViewController.m in Sources */,
+				AFF873D11B985BDD00DF92C9 /* NSString+md5String.m in Sources */,
 				AFF873CB1B957F9800DF92C9 /* TTRegistView.m in Sources */,
 				AFDBBB2F1B82D79C00693BDB /* TTAboutUsViewController.m in Sources */,
 				AF50DD621B7D95F200A0AFB3 /* MBProgressHUD+Add.m in Sources */,

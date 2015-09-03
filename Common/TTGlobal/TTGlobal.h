@@ -65,6 +65,8 @@
 #define TTUploadFileURL    @"/huhu/upload/discuz2app1/topicpost.php?type=post1&fid=2&img=1"
 #define TTRegistUCenterURL @"/huhu/upload/plugin.php?id=iphone:user&func=register"
 #define TTLoginURL         @"/huhu/upload/discuz2app1/login.php?type=onlinedo"
+#define TTactivationURL    @"http://123.57.48.206/huhu/upload/activation.php"
+
 
 
 
